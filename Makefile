@@ -16,19 +16,25 @@ DEPLOY_USER = mrawde
 DEPLOY_REPO_NAME = ld48-mrawde
 DEPLOY_REMOTE = git@github.com:$(DEPLOY_USER)/$(DEPLOY_REPO_NAME).git
 
+sprite_pngs := 
+sound_wavs :=
+
 all: sprites sounds
 	
-sprites:
+sprites: $(sprite_pngs)
 	@echo "Updating all sprites..."
 	@$(QUADPLAY_ROOT)/tools/sprite_json_generator.py -u
 
 %.png : aseprite/%.aseprite
 	scripts/export_aseprite $<
 
-sounds: 
+sounds: $(sound_wavs)
+	@echo "no-op"
 
 %.mp3 : sfx/%.wav
 	lame $< $@
+
+.PHONY: all sprites sounds
 
 # this target deploys to a github repo that you can then point at with a url like:
 # https://morgan3d.github.io/quadplay/console/quadplay.html?game=https://<USER_NAME>.github.io/<DEPLOY_REPO_NAME>/<GAME_NAME>.game.json

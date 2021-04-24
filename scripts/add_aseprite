@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import subprocess
 QUADPLAY_ROOT="/Users/Ed/projects/quadplay-dev"
 
@@ -7,11 +8,22 @@ def find_binary(name):
     return os.path.join(QUADPLAY_ROOT, "tools", name)
 
 def go(aseprite, size):
+    e = "scripts/export_aseprite"
+    subprocess.check_call([
+        e, aseprite])
+
+    dirName, baseName = os.path.split(aseprite)
+    name, ext = os.path.splitext(baseName)
+    asepriteJson = os.path.join(dirName, 
+        name + '.aseprite.json')
+    spritePng = name + '.png'
+
     b = find_binary('sprite_json_generator.py')
     subprocess.check_call([
-        b, '--aseprite', aseprite,
+        b, '--new',
+        '--aseprite', asepriteJson,
         '--size', size[0], size[1],
-        '--new'])
+        spritePng])
 
 if __name__ == '__main__':
     import argparse
