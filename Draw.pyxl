@@ -1,13 +1,14 @@
-const COLORS = [
-    #f00,
-    #0f0,
-    #00f,
-    #0ff,
-    #f0f,
-    #ff0,
-]
-const HUD_LEVEL_FONT = font
 
+def init_colors_from_sprite(row):
+    let colors = []
+    const spritesheet = TeamColors_sprite
+    for i < spritesheet.size.x:
+        push(colors, get_sprite_pixel_color(spritesheet[i][row], xy(0, 0)))
+    return colors
+const COLORS = init_colors_from_sprite(0)
+const SECONDARY_COLORS = init_colors_from_sprite(1)
+const HUD_LEVEL_FONT = font
+const GROUND_COLOR = get_sprite_pixel_color(GroundTiles_sprite[0][0], xy(0, 0))
 
 def draw_game(level_elem, player_state):
     draw_level(level_elem)
@@ -18,7 +19,7 @@ def draw_game(level_elem, player_state):
         compose_transform({
             pos: BOARD_OFFSET,
         })
-        draw_path(player_state.path, #0f0)
+        draw_path(player_state.path, SECONDARY_COLORS[player_state.curr_truck])
     
 def draw_level(level_elem) preserving_transform:
     compose_transform({
@@ -26,17 +27,21 @@ def draw_level(level_elem) preserving_transform:
     })
     
     const level_state = level_elem.state
+    let tile_rand = make_random(level_state.num)
+
     for y < level_state.size.y:
         for x < level_state.size.x:
             const coord = xy(x, y)
             const i = to_index(level_state.size, coord)
             const corner = xy(x, y) * TILE_SIZE
-            const fill_color = if level_state.visited[i] then #ccc else ∅
-            draw_corner_rect({
-                corner: corner,
-                size: TILE_SIZE,
-                outline: #ccc,
-                color: fill_color,
+            
+            const spritesheet_x = random_integer(0, 3, tile_rand)
+            const spritesheet_y = if level_state.visited[i] then 1 else 0
+            const sprite = GroundTiles_sprite[spritesheet_x][spritesheet_y]
+            const sprite_pos = corner + ½ TILE_SIZE
+            draw_sprite({
+                sprite: sprite,
+                pos: sprite_pos,  
             })
     
     const trucks = level_elem.trucks

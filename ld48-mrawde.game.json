@@ -1,6 +1,8 @@
 {
     "achievements": false,
     "assets": {
+        "GroundTiles_sprite": "GroundTiles.sprite.json",
+        "TeamColors_sprite": "TeamColors.sprite.json",
         "TitleScreen_sprite": "TitleScreen.sprite.json",
         "font": "quad://fonts/deja-8.font.json"
     },
@@ -54,6 +56,61 @@
             "type": "number",
             "value": "6"
         },
+        "FRAMES_MOVE": {
+            "description": "How many frames does it take to move.",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "60"
+            },
+            "min": {
+                "type": "number",
+                "value": "1"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "8"
+        },
+        "HUD_LEVEL_COLOR": {
+            "description": "Color of the level text",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "54%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "17%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "75%"
+                }
+            }
+        },
+        "HUD_LEVEL_OFFSET": {
+            "description": "Where to draw the level counter",
+            "nudge": {
+                "x": "+10",
+                "y": "-10"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "270"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "30"
+                }
+            }
+        },
         "TESTLEVELS_YAML": {
             "type": "raw",
             "url": "TestLevels.yml"
@@ -91,65 +148,10 @@
         "TUTORIALLEVELS_YAML": {
             "type": "raw",
             "url": "TutorialLevels.yml"
-        },
-        "HUD_LEVEL_OFFSET": {
-            "type": "xy",
-            "value": {
-                "x": {
-                    "type": "number",
-                    "value": "270"
-                },
-                "y": {
-                    "type": "number",
-                    "value": "30"
-                }
-            },
-            "description": "Where to draw the level counter",
-            "nudge": {
-                "x": "+10",
-                "y": "-10"
-            }
-        },
-        "HUD_LEVEL_COLOR": {
-            "type": "rgba",
-            "value": {
-                "r": {
-                    "type": "number",
-                    "value": "75%"
-                },
-                "g": {
-                    "type": "number",
-                    "value": "17%"
-                },
-                "b": {
-                    "type": "number",
-                    "value": "54%"
-                },
-                "a": {
-                    "type": "number",
-                    "value": "100%"
-                }
-            },
-            "description": "Color of the level text"
-        },
-        "FRAMES_MOVE": {
-            "type": "number",
-            "value": "8",
-            "description": "How many frames does it take to move.",
-            "min": {
-                "type": "number",
-                "value": "1"
-            },
-            "max": {
-                "type": "number",
-                "value": "60"
-            },
-            "format": "",
-            "quantum": 0
         }
     },
     "cooperative": false,
-    "copyright": "©2021 Your Name Here",
+    "copyright": "\u00a92021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],

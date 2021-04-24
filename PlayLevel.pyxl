@@ -213,7 +213,7 @@ def sequence_move(level_elem, truck_elem, dir):
 
 enter(level_state_)
 ────────────────────────────────────────────────────────────────────────
-set_background(BACKGROUND_COLOR)
+set_background(GROUND_COLOR)
 
 player_state = {
     curr_truck: 0,
