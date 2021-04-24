@@ -1,3 +1,14 @@
+const COLORS = [
+    #f00,
+    #0f0,
+    #00f,
+    #0ff,
+    #f0f,
+    #ff0,
+]
+const HUD_LEVEL_FONT = font
+
+
 def draw_game(level_state, player_state):
     draw_level(level_state, player_state)
     draw_hud(level_state, player_state)

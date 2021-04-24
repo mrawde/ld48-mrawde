@@ -4,15 +4,6 @@ PlayLevel
 let level_state
 let player_state
 
-const COLORS = [
-    #f00,
-    #0f0,
-    #00f,
-    #0ff,
-    #f0f,
-    #ff0,
-]
-const HUD_LEVEL_FONT = font
 
 def init_level_state(level):
     let level_state = deep_clone(level)
