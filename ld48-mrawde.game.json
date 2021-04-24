@@ -6,9 +6,11 @@
     "packages": [],
     "scripts": [],
     "modes": [
-        "Play"
+        "PlayLevel",
+        "TitleScreen",
+        "LevelSelect"
     ],
-    "start_mode": "Play",
+    "start_mode": "PlayLevel",
     "docs": [],
     "assets": {
         "font": "quad://fonts/deja-8.font.json"
