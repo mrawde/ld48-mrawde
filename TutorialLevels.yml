@@ -1,0 +1,6 @@
+name: "tutorial"
+levels: 
+- board: |
+    a . A
+    . . .
+    . . .

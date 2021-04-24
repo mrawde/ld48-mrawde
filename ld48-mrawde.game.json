@@ -87,10 +87,54 @@
             "quantum": 0,
             "type": "number",
             "value": "5"
+        },
+        "TUTORIALLEVELS_YAML": {
+            "type": "raw",
+            "url": "TutorialLevels.yml"
+        },
+        "HUD_LEVEL_OFFSET": {
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "270"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "30"
+                }
+            },
+            "description": "Where to draw the level counter",
+            "nudge": {
+                "x": "+10",
+                "y": "-10"
+            }
+        },
+        "HUD_LEVEL_COLOR": {
+            "type": "rgba",
+            "value": {
+                "r": {
+                    "type": "number",
+                    "value": "75%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "17%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "54%"
+                },
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            },
+            "description": "Color of the level text"
         }
     },
     "cooperative": false,
-    "copyright": "\u00a92021 Your Name Here",
+    "copyright": "©2021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],
@@ -102,14 +146,15 @@
         "PlayLevel",
         "TitleScreen",
         "LevelSelect",
-        "GameOver"
+        "GameOver",
+        "FinishLevelPack"
     ],
     "packages": [],
     "screenshot_tag": "ld48-mrawde",
     "scripts": [
         "Util.pyxl",
         "UiUtil.pyxl",
-        "Levels.pyxl",
+        "LevelPacks.pyxl",
         "GameProgress.pyxl"
     ],
     "start_mode": "TitleScreen",

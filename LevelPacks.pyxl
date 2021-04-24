@@ -51,8 +51,18 @@ def load_level_from_string(level_str):
 
     return level
    
-def create_levels_from_data(data):
-    let levels = []
-    for level in data:
-        push(levels, load_level_from_string(level.board))
-    return levels
+def create_level_pack_from_data(data):
+    let pack = {
+        name: data.name,
+        levels: []
+    }
+    for i < size(data.levels):
+        const level_data = data.levels[i]
+        const board_str = level_data.board
+        let level = load_level_from_string(board_str)
+        level.num = i+1
+        push(pack.levels, level)
+    return pack
+
+const TUTORIAL_LEVEL_PACK = create_level_pack_from_data(TUTORIALLEVELS_YAML)
+const CAMPAIGN_LEVEL_PACK = create_level_pack_from_data(TESTLEVELS_YAML)
