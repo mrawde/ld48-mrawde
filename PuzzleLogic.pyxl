@@ -6,14 +6,18 @@ def can_move(level_state, player_state, dest_coord):
     if manhattan(curr_truck.coord - dest_coord) != 1:
         return false
         
-    const curr_goal = level_state.goals[player_state.curr_truck]
-    if eq(curr_truck.coord, curr_goal.coord):
+    if is_truck_at_goal(level_state, player_state.curr_truck):
         return false
         
     if not is_coord_valid_for_move(level_state, dest_coord):
         return false
 
     return true
+
+def is_truck_at_goal(level_state, truck_idx):
+    const curr_goal = level_state.goals[truck_idx]
+    const curr_truck = level_state.trucks[truck_idx]
+    return eq(curr_truck.coord, curr_goal.coord)
 
 def is_coord_valid_for_move(level_state, coord):
     if not is_on_board(level_state.size, coord):
@@ -28,8 +32,7 @@ def is_coord_valid_for_move(level_state, coord):
         if eq(truck.coord, coord):
             return false
             
-    return true
-           
+    return true       
 
 def is_level_done(level_state):
     for i < size(level_state.trucks):

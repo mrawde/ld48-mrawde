@@ -44,7 +44,9 @@ def update_curr_path(level_state, player_state):
     if is_long_press():
         // look at the current
         const coord = screen_to_board_coord(cursor_hover)
-        if not is_coord_valid_for_move(level_state, coord):
+        
+        if (is_truck_at_goal(level_state, player_state.curr_truck) 
+            or not is_coord_valid_for_move(level_state, coord)):
             return
         
         const last_coord = last_value(path)
