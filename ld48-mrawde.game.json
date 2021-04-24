@@ -1,28 +1,118 @@
 {
-    "title": "ld48-mrawde",
+    "achievements": false,
+    "assets": {
+        "TitleScreen_sprite": "TitleScreen.sprite.json",
+        "font": "quad://fonts/deja-8.font.json"
+    },
+    "competitive": false,
+    "constants": {
+        "BACKGROUND_COLOR": {
+            "description": "Background color",
+            "type": "rgb",
+            "value": {
+                "b": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            }
+        },
+        "BOARD_OFFSET": {
+            "description": "offset from the screen for tile[0,0]",
+            "nudge": {
+                "x": "+10",
+                "y": "-10"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "60"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "20"
+                }
+            }
+        },
+        "FRAMES_LONG_PRESS": {
+            "description": "How long the touch/mouse is down to treat this as a long press.",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "100"
+            },
+            "min": 0,
+            "quantum": 0,
+            "type": "number",
+            "value": "6"
+        },
+        "TESTLEVELS_YAML": {
+            "type": "raw",
+            "url": "TestLevels.yml"
+        },
+        "TILE_SIZE": {
+            "description": "Dimension of each tile.",
+            "nudge": {
+                "x": "+1",
+                "y": "-1"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "32"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "32"
+                }
+            }
+        },
+        "TOUCH_CLICK_RADIUS": {
+            "description": "Radius where the mouse needs to be released within to count as a touch/click.",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "30"
+            },
+            "min": 0,
+            "quantum": 0,
+            "type": "number",
+            "value": "5"
+        }
+    },
+    "cooperative": false,
+    "copyright": "\u00a92021 Your Name Here",
+    "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
-    "copyright": "©2021 Your Name Here",
+    "docs": [],
+    "highscores": false,
     "license": "CC0/Public Domain (Replace with your own license)",
-    "packages": [],
-    "scripts": [],
+    "max_players": 1,
+    "min_players": 1,
     "modes": [
         "PlayLevel",
         "TitleScreen",
-        "LevelSelect"
+        "LevelSelect",
+        "GameOver"
     ],
-    "start_mode": "PlayLevel",
-    "docs": [],
-    "assets": {
-        "font": "quad://fonts/deja-8.font.json"
-    },
-    "version": 0,
-    "min_players": 1,
-    "max_players": 1,
-    "cooperative": false,
-    "competitive": false,
-    "achievements": false,
-    "highscores": false,
-    "description": "Description of your game in about 100 characters.",
-    "constants": {},
-    "screenshot_tag": "ld48-mrawde"
+    "packages": [],
+    "screenshot_tag": "ld48-mrawde",
+    "scripts": [
+        "Util.pyxl",
+        "UiUtil.pyxl",
+        "Levels.pyxl",
+        "GameProgress.pyxl"
+    ],
+    "start_mode": "TitleScreen",
+    "title": "ld48-mrawde",
+    "version": 0
 }
