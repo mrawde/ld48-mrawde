@@ -6,12 +6,12 @@ TitleScreen
 enter
 ────────────────────────────────────────────────────────────────────────
 // This event runs when the mode is entered via set_mode() or push_mode().
-
+set_background(TitleScreen_sprite)
 
 frame
 ────────────────────────────────────────────────────────────────────────
-// This event runs 60 times per second. Game logic, simulation, user input, and drawing all go here.
-
+if any_button_press():
+    set_mode(PlayLevel)
 
 leave
 ────────────────────────────────────────────────────────────────────────

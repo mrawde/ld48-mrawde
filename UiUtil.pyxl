@@ -1,0 +1,34 @@
+// Scripts, variables, and constants here are visible to all modes
+let curr_drag = ∅ 
+let cursor_hover = xy(0, 0)
+
+def update_cursor_hover():
+    const mouse = device_control("get_mouse_state")
+    if mouse.dx or mouse.dy:
+        cursor_hover = mouse.xy
+        
+
+def update_curr_drag():
+    if touch.pressed_a and not curr_drag:
+        curr_drag = {
+            start_frame: mode_frames,
+            start_pos: touch.xy,
+        }
+    
+    if touch.released_a:
+        curr_drag = ∅
+    
+    
+def is_click():
+    if not (curr_drag and curr_drag.start_frame ≥ mode_frames - FRAMES_LONG_PRESS):
+        return false
+    
+    let release_pos = ∅
+    if touch.released_a:
+        release_pos = touch.xy
+        
+    return release_pos and ‖release_pos - curr_drag.start_pos‖ < TOUCH_CLICK_RADIUS
+
+
+def is_long_press():
+    return curr_drag and curr_drag.start_frame < mode_frames - FRAMES_LONG_PRESS

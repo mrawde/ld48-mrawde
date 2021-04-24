@@ -1,7 +1,235 @@
 PlayLevel
 ════════════════════════════════════════════════════════════════════════
 
+let level_state
+let player_state
+
+const COLORS = [
+    #f00,
+    #0f0,
+    #00f,
+    #0ff,
+    #f0f,
+    #ff0,
+]
+
+def init_level_state(level):
+    let level_state = deep_clone(level)
+    const num_tiles = level_state.size.x * level_state.size.y
+    level_state.visited = []
+    for i < num_tiles:
+        push(level_state.visited, false)
+    return level_state
+        
+def screen_to_board_coord(screen_xy):
+    const offset = BOARD_OFFSET
+    return floor((screen_xy - offset) / TILE_SIZE)
+
+def copy_level_state(level_state):
+    return deep_clone(level_state)
+
+def is_level_done(level_state):
+    for i < size(level_state.trucks):
+        const truck = level_state.trucks[i]
+        const goal = level_state.goals[i]
+        if not eq(truck.coord, goal.coord):
+            return false
+    return true
+            
+def check_level(level_state):
+    if is_level_done(level_state):
+        game_progress.curr_level += 1
+        set_mode(PlayLevel, ∅)
+
+def change_to_player(level_state, player_state, player_idx):
+    
+def handle_player_input(gamepad):
+    let actions = {}
+    if is_click():
+        const coord = screen_to_board_coord(cursor_hover)
+        actions.select = coord
+        
+    if is_long_press():
+        actions.select = screen_to_board_coord(curr_drag.start_pos)
+
+        const coord = screen_to_board_coord(cursor_hover)
+        actions.move_to = coord
+        
+    if gamepad.xx or gamepad.yy:
+        actions.move = x_or_y(xy(gamepad.xx, gamepad.yy))
+        
+    if gamepad.dd:
+        actions.next_player = true
+        
+    if gamepad.qq:
+        actions.reset_level = true
+        
+    if gamepad.ee:
+        actions.undo = true
+            
+    return actions
+    
+def can_move(level_state, player_state, dest_coord):
+    if not is_on_board(level_state.size, dest_coord):
+        return false
+        
+    const curr_truck = level_state.trucks[player_state.curr_truck]
+    if manhattan(curr_truck.coord - dest_coord) != 1:
+        return false
+        
+    const curr_goal = level_state.goals[player_state.curr_truck]
+    if eq(curr_truck.coord, curr_goal.coord):
+        return false
+        
+    const dest_i = to_index(level_state.size, dest_coord)
+    
+    // collide with visited
+    if level_state.visited[dest_i]:
+        return false
+        
+    // collide with other trucks
+    for truck in level_state.trucks:
+        if eq(truck.coord, dest_coord):
+            return false
+    
+    return true
+    
+def update_state(level_state, player_state, actions):
+    if actions.reset_level:
+        set_mode(PlayLevel, player_state.undo_stack[0])
+        
+    if actions.next_player or actions.select:
+        let player_idx
+        if actions.next_player:
+            player_idx = (player_state.curr_truck + 1) mod size(level_state.trucks)
+        else if actions.select:
+            const trucks = level_state.trucks
+            for i < size(trucks):
+                const truck = trucks[i]
+                if eq(actions.select, truck.coord):
+                    player_idx = i
+    
+        if player_idx ≠ ∅:
+            if player_state.curr_truck ≠ player_idx:
+                const last_state = last_value(player_state.undo_stack)
+                if not eq_recursive(level_state, last_state):
+                    push(player_state.undo_stack, copy_level_state(level_state))
+                player_state.curr_truck = player_idx
+
+    if actions.move_to or actions.move:
+        const curr_truck = level_state.trucks[player_state.curr_truck]
+        const dest_coord = actions.move_to
+        if not dest_coord:
+            const move_dir = actions.move
+            const dest_coord = curr_truck.coord + move_dir
+
+        if can_move(level_state, player_state, dest_coord):
+            const curr_i = to_index(level_state.size, curr_truck.coord)
+            level_state.visited[curr_i] = true
+            curr_truck.coord = dest_coord       
+        
+
+def draw_level(level_state, player_state) preserving_transform:
+    compose_transform({
+        pos: BOARD_OFFSET,
+    })
+    
+    for y < level_state.size.y:
+        for x < level_state.size.x:
+            const coord = xy(x, y)
+            const i = to_index(level_state.size, coord)
+            const corner = xy(x, y) * TILE_SIZE
+            const fill_color = if level_state.visited[i] then #ccc else ∅
+            draw_corner_rect({
+                corner: corner,
+                size: TILE_SIZE,
+                outline: #ccc,
+                color: fill_color,
+            })
+    
+    const trucks = level_state.trucks
+    for i < size(trucks):
+        const truck = trucks[i]
+        draw_truck(i, truck)
+        
+    const goals = level_state.goals
+    for i < size(goals):
+        const goal = goals[i]
+        draw_goal(i, goal)
+        
+    const curr_truck = player_state.curr_truck
+    const curr_coord = trucks[curr_truck].coord
+    draw_corner_rect({
+        corner: curr_coord * TILE_SIZE,
+        size: TILE_SIZE,
+        outline: #000,
+    })
+        
+def draw_truck(truck_idx, truck):
+    const corner = truck.coord * TILE_SIZE
+    const truck_color = COLORS[truck_idx]
+    draw_corner_rect({
+        corner: corner,
+        size: TILE_SIZE,
+        color: truck_color,
+    })
+    
+def draw_goal(truck_idx, goal):
+    const corner = goal.coord * TILE_SIZE
+    const truck_color = COLORS[truck_idx]
+    draw_corner_rect({
+        corner: corner,
+        size: TILE_SIZE,
+        outline: truck_color,
+    })
+
+    
+
+enter(level_state_)
+────────────────────────────────────────────────────────────────────────
+player_state = {
+    curr_truck: 0,
+    undo_stack: [],
+}
+
+const levels = create_levels_from_data(TESTLEVELS_YAML)
+
+if level_state_:
+    level_state = level_state_
+else:
+    if game_progress.curr_level < size(levels):
+        level_state = init_level_state(levels[game_progress.curr_level])
+    else:
+        set_mode(GameOver)
+    
+push(player_state.undo_stack, copy_level_state(level_state))
+set_background(BACKGROUND_COLOR)
+
 
 frame
 ────────────────────────────────────────────────────────────────────────
 
+update_cursor_hover()
+draw_rect({
+    pos: cursor_hover,
+    size: xy(5, 5),
+    color: #333,
+})
+
+check_level(level_state)
+let actions = handle_player_input(gamepad_array[0])
+
+if actions.undo:
+    while (eq_recursive(level_state, last_value(player_state.undo_stack)) 
+        and size(player_state.undo_stack) > 1):
+        pop(player_state.undo_stack)
+        
+    if size(player_state.undo_stack) > 1:
+        level_state = pop(player_state.undo_stack)
+    else:
+        level_state = copy_level_state(last_value(player_state.undo_stack))
+        
+update_state(level_state, player_state, actions)
+draw_level(level_state, player_state)
+
+update_curr_drag()

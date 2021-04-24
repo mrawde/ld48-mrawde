@@ -1,0 +1,58 @@
+// this logic should be valid to use with a yml constant.
+
+
+def init_legend():
+    let legend = {}
+    const letters = "abcdef"
+    for i < size(letters):
+        const ch = letters[i]
+        const CH = uppercase(ch)
+        legend[ch] = { i:i, start: true, }
+        legend[CH] = { i:i, goal: true, }
+        
+    legend["."] = {empty: true}
+    return legend
+
+const legend = init_legend()
+
+
+def load_level_from_string(level_str):
+    let level = {
+        trucks: [],
+        goals: [],
+    }
+    let tiles = []
+    let ret = ""
+    for ch in level_str:
+        const tile_obj = deep_clone(legend[ch])
+        if tile_obj:
+            push(tiles, legend[ch])
+    assert(size(tiles) > 1, "Invalid level string")
+    const d = ⌊sqrt(size(tiles))⌋
+    assert(d² == size(tiles), "Invalid level string")
+    
+    level.size = xy(d, d)
+        
+    let num_trucks = 0
+    for tile in tiles:
+        if tile.goal:
+            num_trucks = max(num_trucks, tile.i+1)
+
+    for i < num_trucks:
+        push(level.trucks, {})
+        push(level.goals, {})
+
+    for i < size(tiles):
+        const tile = tiles[i]
+        if tile.goal:
+            level.goals[tile.i].coord = to_coord(level.size, i)
+        if tile.start:
+            level.trucks[tile.i].coord = to_coord(level.size, i)
+
+    return level
+   
+def create_levels_from_data(data):
+    let levels = []
+    for level in data:
+        push(levels, load_level_from_string(level.board))
+    return levels

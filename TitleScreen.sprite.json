@@ -1,0 +1,11 @@
+{
+    "aseprite_json": "aseprite/TitleScreen.aseprite.json",
+    "license": "None",
+    "locked_size": true,
+    "names": {},
+    "sprite_size": {
+        "x": 384,
+        "y": 224
+    },
+    "url": "TitleScreen.png"
+}

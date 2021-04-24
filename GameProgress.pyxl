@@ -1,0 +1,7 @@
+// Scripts, variables, and constants here are visible to all modes
+def init_game_progress():
+    return {
+        curr_level: 0,
+    }
+    
+let game_progress = init_game_progress()

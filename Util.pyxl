@@ -1,0 +1,53 @@
+// Scripts, variables, and constants here are visible to all modes
+
+def to_coord(grid_size, i):
+    return xy(i % grid_size.x, ⌊i / grid_size.x⌋)
+    
+def to_index(grid_size, coord):
+    return coord.y * grid_size.x + coord.x % grid_size.x
+
+def x_or_y(v):
+    let ret = xy(v)
+    if ret.x and ret.y:
+        ret.y = 0
+    return ret
+    
+def eq(a, b):
+    return (a == b) or (a and b and equivalent(a, b))
+
+def eq_recursive(a, b):
+    const type_a = type(a)
+    if type_a != type(b):
+        return false
+
+    // scalar values should have been caught by the above
+    if (type_a == "boolean" or type_a == "function" or type_a == "nil" or type_a == "number" or type_a == "string"):
+        return a == b
+
+    if type_a == "array":
+        if size(a) != size(b):
+            return false
+        for i < size(a):
+            if not eq_recursive(a[i], b[i]):
+                return false
+
+    if type_a == "object":
+        if not equivalent(sorted(keys(a)), sorted(keys(b))):
+            return false
+
+        for v at k in a:
+            if not eq_recursive(v, b[k]):
+                return false
+
+    return true
+
+def manhattan(v):
+    return abs(v.x) + abs(v.y)
+    
+// returns true if x is between lo or hi (inclusive)
+def is_between(x, lo, hi):
+    return x ≥ lo and x ≤ hi
+
+// returns true if coord is on standard grid of grid_size    
+def is_on_board(grid_size, coord):
+    return is_between(coord.x, 0, grid_size.x-1) and is_between(coord.y, 0, grid_size.y-1)
