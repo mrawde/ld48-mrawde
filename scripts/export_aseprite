@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+import os
+import subprocess
+
+ASEPRITE_BIN = '/Users/Ed/Library/Application Support/Steam/steamapps/common/Aseprite/Aseprite.app/Contents/MacOS/aseprite'
+
+def go(aseprite):
+    dirName, baseName = os.path.split(aseprite)
+    name, ext = os.path.splitext(baseName)
+    asepriteJson = os.path.join(dirName, 
+        name + '.aseprite.json')
+    outputPng = name + '.png'
+
+    cmd = [ASEPRITE_BIN,
+        aseprite,
+        '--batch',
+        '--sheet-type', 'rows',
+        '--format', 'json-array',
+        '--list-layers',
+        '--list-tags',
+        '--list-slices',
+        '--data', asepriteJson,
+        '--sheet', outputPng]
+    subprocess.check_call(cmd)
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('aseprite', help='path to aseprite file')
+    args = parser.parse_args()
+    go(args.aseprite)

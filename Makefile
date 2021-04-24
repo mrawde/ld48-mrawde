@@ -22,6 +22,9 @@ sprites:
 	@echo "Updating all sprites..."
 	@$(QUADPLAY_ROOT)/tools/sprite_json_generator.py -u
 
+%.png : aseprite/%.aseprite
+	scripts/export_aseprite $<
+
 sounds: 
 
 %.mp3 : sfx/%.wav

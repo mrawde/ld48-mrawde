@@ -3,8 +3,6 @@
 import subprocess
 QUADPLAY_ROOT="/Users/Ed/projects/quadplay-dev"
 
-ASEPRITE_BIN = '/Users/Ed/Library/Application\ Support/Steam/steamapps/common/Aseprite/Aseprite.app/Contents/MacOS/aseprite'
-
 def find_binary(name):
     return os.path.join(QUADPLAY_ROOT, "tools", name)
 
