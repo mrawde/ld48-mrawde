@@ -1,0 +1,68 @@
+def draw_game(level_state, player_state):
+    draw_level(level_state, player_state)
+    draw_hud(level_state, player_state)
+    
+def draw_level(level_state, player_state) preserving_transform:
+    compose_transform({
+        pos: BOARD_OFFSET,
+    })
+    
+    for y < level_state.size.y:
+        for x < level_state.size.x:
+            const coord = xy(x, y)
+            const i = to_index(level_state.size, coord)
+            const corner = xy(x, y) * TILE_SIZE
+            const fill_color = if level_state.visited[i] then #ccc else ∅
+            draw_corner_rect({
+                corner: corner,
+                size: TILE_SIZE,
+                outline: #ccc,
+                color: fill_color,
+            })
+    
+    const trucks = level_state.trucks
+    for i < size(trucks):
+        const truck = trucks[i]
+        draw_truck(i, truck)
+        
+    const goals = level_state.goals
+    for i < size(goals):
+        const goal = goals[i]
+        draw_goal(i, goal)
+        
+    const curr_truck = player_state.curr_truck
+    const curr_coord = trucks[curr_truck].coord
+    draw_corner_rect({
+        corner: curr_coord * TILE_SIZE,
+        size: TILE_SIZE,
+        outline: #000,
+    })
+        
+def draw_truck(truck_idx, truck):
+    const corner = truck.coord * TILE_SIZE
+    const truck_color = COLORS[truck_idx]
+    draw_corner_rect({
+        corner: corner,
+        size: TILE_SIZE,
+        color: truck_color,
+    })
+    
+def draw_goal(truck_idx, goal):
+    const corner = goal.coord * TILE_SIZE
+    const truck_color = COLORS[truck_idx]
+    draw_corner_rect({
+        corner: corner,
+        size: TILE_SIZE,
+        outline: truck_color,
+    })
+
+
+def draw_hud(level_state, player_state):
+    const level_num = level_state.num
+    draw_text({
+        pos: HUD_LEVEL_OFFSET,
+        font: HUD_LEVEL_FONT,
+        text: replace("N", {"N": level_num}),
+        color: HUD_LEVEL_COLOR,
+    })
+        

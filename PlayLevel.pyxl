@@ -28,19 +28,6 @@ def screen_to_board_coord(screen_xy):
 
 def copy_level_state(level_state):
     return deep_clone(level_state)
-
-def is_level_done(level_state):
-    for i < size(level_state.trucks):
-        const truck = level_state.trucks[i]
-        const goal = level_state.goals[i]
-        if not eq(truck.coord, goal.coord):
-            return false
-    return true
-            
-def check_level(level_state):
-    if is_level_done(level_state):
-        advance_game_progress(game_progress)
-        set_mode(PlayLevel, ∅)
     
 def handle_player_input(gamepad):
     let actions = {}
@@ -67,31 +54,6 @@ def handle_player_input(gamepad):
         actions.undo = true
             
     return actions
-    
-def can_move(level_state, player_state, dest_coord):
-    if not is_on_board(level_state.size, dest_coord):
-        return false
-        
-    const curr_truck = level_state.trucks[player_state.curr_truck]
-    if manhattan(curr_truck.coord - dest_coord) != 1:
-        return false
-        
-    const curr_goal = level_state.goals[player_state.curr_truck]
-    if eq(curr_truck.coord, curr_goal.coord):
-        return false
-        
-    const dest_i = to_index(level_state.size, dest_coord)
-    
-    // collide with visited
-    if level_state.visited[dest_i]:
-        return false
-        
-    // collide with other trucks
-    for truck in level_state.trucks:
-        if eq(truck.coord, dest_coord):
-            return false
-    
-    return true
     
 def update_state(level_state, player_state, actions):
     if actions.reset_level:
@@ -126,74 +88,6 @@ def update_state(level_state, player_state, actions):
             const curr_i = to_index(level_state.size, curr_truck.coord)
             level_state.visited[curr_i] = true
             curr_truck.coord = dest_coord       
-        
-def draw_game(level_state, player_state):
-    draw_level(level_state, player_state)
-    draw_hud(level_state, player_state)
-    
-def draw_level(level_state, player_state) preserving_transform:
-    compose_transform({
-        pos: BOARD_OFFSET,
-    })
-    
-    for y < level_state.size.y:
-        for x < level_state.size.x:
-            const coord = xy(x, y)
-            const i = to_index(level_state.size, coord)
-            const corner = xy(x, y) * TILE_SIZE
-            const fill_color = if level_state.visited[i] then #ccc else ∅
-            draw_corner_rect({
-                corner: corner,
-                size: TILE_SIZE,
-                outline: #ccc,
-                color: fill_color,
-            })
-    
-    const trucks = level_state.trucks
-    for i < size(trucks):
-        const truck = trucks[i]
-        draw_truck(i, truck)
-        
-    const goals = level_state.goals
-    for i < size(goals):
-        const goal = goals[i]
-        draw_goal(i, goal)
-        
-    const curr_truck = player_state.curr_truck
-    const curr_coord = trucks[curr_truck].coord
-    draw_corner_rect({
-        corner: curr_coord * TILE_SIZE,
-        size: TILE_SIZE,
-        outline: #000,
-    })
-        
-def draw_truck(truck_idx, truck):
-    const corner = truck.coord * TILE_SIZE
-    const truck_color = COLORS[truck_idx]
-    draw_corner_rect({
-        corner: corner,
-        size: TILE_SIZE,
-        color: truck_color,
-    })
-    
-def draw_goal(truck_idx, goal):
-    const corner = goal.coord * TILE_SIZE
-    const truck_color = COLORS[truck_idx]
-    draw_corner_rect({
-        corner: corner,
-        size: TILE_SIZE,
-        outline: truck_color,
-    })
-
-
-def draw_hud(level_state, player_state):
-    const level_num = level_state.num
-    draw_text({
-        pos: HUD_LEVEL_OFFSET,
-        font: HUD_LEVEL_FONT,
-        text: replace("N", {"N": level_num}),
-        color: HUD_LEVEL_COLOR,
-    })
         
 
 enter(level_state_)

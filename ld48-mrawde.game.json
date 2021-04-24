@@ -155,7 +155,9 @@
         "Util.pyxl",
         "UiUtil.pyxl",
         "LevelPacks.pyxl",
-        "GameProgress.pyxl"
+        "GameProgress.pyxl",
+        "Draw.pyxl",
+        "PuzzleLogic.pyxl"
     ],
     "start_mode": "TitleScreen",
     "title": "ld48-mrawde",

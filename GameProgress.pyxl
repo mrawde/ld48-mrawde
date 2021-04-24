@@ -5,6 +5,7 @@ const PACKS = [
 
 def init_game_progress():
     let progress = load_local("progress")
+    progress = ∅
     if not progress:
         progress = {
             curr_pack_idx: 0,
