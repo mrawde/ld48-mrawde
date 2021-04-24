@@ -1,0 +1,27 @@
+{
+    "aseprite_json": "aseprite/Truck.aseprite.json",
+    "license": "None",
+    "locked_size": true,
+    "names": {
+        "idle": {
+            "end": {
+                "x": 1.0,
+                "y": 0.0
+            },
+            "extrapolate": "oscillate",
+            "frames": [
+                6.0,
+                6.0
+            ],
+            "start": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        }
+    },
+    "sprite_size": {
+        "x": 32,
+        "y": 32
+    },
+    "url": "Truck.png"
+}

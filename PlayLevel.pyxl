@@ -19,8 +19,10 @@ def init_level_element(level_state):
         state: level_state,
         trucks: [],
     }
-    for truck in level_state.trucks:
+    for i < size(level_state.trucks):
+        const truck = level_state.trucks[i]
         let truck_elem = {
+            which: i,
             offset: xy(0, 0),
             state: truck,
         }

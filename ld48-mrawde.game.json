@@ -4,6 +4,7 @@
         "GroundTiles_sprite": "GroundTiles.sprite.json",
         "TeamColors_sprite": "TeamColors.sprite.json",
         "TitleScreen_sprite": "TitleScreen.sprite.json",
+        "Truck_sprite": "Truck.sprite.json",
         "font": "quad://fonts/deja-8.font.json"
     },
     "competitive": false,
@@ -145,13 +146,43 @@
             "type": "number",
             "value": "5"
         },
+        "TRUCK_DOT_RADIUS": {
+            "description": "How big is the dot that we draw on the truck",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "16"
+            },
+            "min": {
+                "type": "number",
+                "value": "1"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "6.085"
+        },
         "TUTORIALLEVELS_YAML": {
             "type": "raw",
             "url": "TutorialLevels.yml"
+        },
+        "Z_PATH": {
+            "type": "number",
+            "value": "1",
+            "description": "Z for the path drawing"
+        },
+        "Z_TRUCK": {
+            "type": "number",
+            "value": "2",
+            "description": "Z for the trucks"
+        },
+        "Z_TILE": {
+            "type": "number",
+            "value": "0",
+            "description": "Z for the ground tiles"
         }
     },
     "cooperative": false,
-    "copyright": "\u00a92021 Your Name Here",
+    "copyright": "©2021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],

@@ -5,8 +5,8 @@ def init_colors_from_sprite(row):
     for i < spritesheet.size.x:
         push(colors, get_sprite_pixel_color(spritesheet[i][row], xy(0, 0)))
     return colors
-const COLORS = init_colors_from_sprite(0)
-const SECONDARY_COLORS = init_colors_from_sprite(1)
+const COLORS = init_colors_from_sprite(1)
+const SECONDARY_COLORS = init_colors_from_sprite(0)
 const HUD_LEVEL_FONT = font
 const GROUND_COLOR = get_sprite_pixel_color(GroundTiles_sprite[0][0], xy(0, 0))
 
@@ -14,7 +14,6 @@ def draw_game(level_elem, player_state):
     draw_level(level_elem)
     draw_hud(game_progress)
     
-    // debug
     preserving_transform:
         compose_transform({
             pos: BOARD_OFFSET,
@@ -41,19 +40,20 @@ def draw_level(level_elem) preserving_transform:
             const sprite_pos = corner + ½ TILE_SIZE
             draw_sprite({
                 sprite: sprite,
-                pos: sprite_pos,  
+                pos: sprite_pos,
+                z: Z_TILE,
             })
-    
+            
+    const goals = level_state.goals
+    for i < size(goals):
+        const goal = goals[i]
+        draw_goal(i, goal)    
+        
     const trucks = level_elem.trucks
     for i < size(trucks):
         const truck_elem = trucks[i]
         const truck_color = COLORS[i]
         draw_truck(truck_elem, truck_color)
-        
-    const goals = level_state.goals
-    for i < size(goals):
-        const goal = goals[i]
-        draw_goal(i, goal)
     
     /*
     const curr_truck = player_state.curr_truck
@@ -68,21 +68,59 @@ def draw_level(level_elem) preserving_transform:
 def draw_truck(truck_elem, truck_color):
     const offset = truck_elem.offset
     const corner = truck_elem.state.coord * TILE_SIZE + offset
-    draw_corner_rect({
-        corner: corner,
-        size: TILE_SIZE,
-        color: truck_color,
+    const sprite = Truck_sprite.idle.frame(0)
+    const sprite_pos = corner + ½ TILE_SIZE
+    draw_sprite({
+        sprite: sprite,
+        pos: sprite_pos, 
+        z: Z_TRUCK,
+    })
+    
+    const which_truck = truck_elem.which
+    const color = COLORS[which_truck]
+    const outline = SECONDARY_COLORS[which_truck]
+    draw_disk({
+        pos: sprite_pos,
+        radius:TRUCK_DOT_RADIUS,
+        color: color,
+        outline: outline,
+        z: Z_TRUCK,
     })
     
 def draw_goal(truck_idx, goal):
     const corner = goal.coord * TILE_SIZE
     const truck_color = COLORS[truck_idx]
-    draw_corner_rect({
-        corner: corner,
-        size: TILE_SIZE,
-        outline: truck_color,
-    })
+    const sec_color = SECONDARY_COLORS[truck_idx]
+    const z = Z_TILE
 
+    const spritesheet_x = truck_idx mod size(GroundTiles_sprite)
+    const sprite = GroundTiles_sprite[spritesheet_x][2]
+    const sprite_pos = corner + ½ TILE_SIZE
+    draw_sprite({
+        sprite: sprite,
+        pos: sprite_pos,
+        z: z,
+    })
+    
+    // draw the platform as 4 rectangles
+    const r_size = ½ TILE_SIZE
+    for ry < 2:
+        for rx < 2:
+            const r_pos = (xy(0.5, 0.5) + xy(rx, ry)) * r_size
+            draw_rect({
+                pos: corner + r_pos,
+                size: r_size - 2,
+                outline: sec_color,
+                z: z,
+            })    
+            
+    draw_disk({
+        pos: sprite_pos,
+        radius: TRUCK_DOT_RADIUS,
+        color: truck_color,
+        outline: sec_color,
+        z: z,
+    })
 
 def draw_hud(game_progress):
     const pack = PACKS[game_progress.curr_pack_idx]
@@ -99,8 +137,10 @@ def draw_path(path, color) preserving_transform:
     if size(path) < 1:
         return
     
+    const z = Z_PATH
     compose_transform({
         pos: ½ TILE_SIZE,
+        z: z,
     })
     
     let last = path[0]

@@ -19,6 +19,7 @@ def go(aseprite):
         '--list-layers',
         '--list-tags',
         '--list-slices',
+        '--filename-format', "{title} {tag} {frame}.{extension}",
         '--data', asepriteJson,
         '--sheet', outputPng]
     subprocess.check_call(cmd)
