@@ -12,10 +12,7 @@ def can_move(level_state, player_state, dest_coord):
     if eq(curr_truck.coord, curr_goal.coord):
         return false
         
-    const dest_i = to_index(level_state.size, dest_coord)
-    
-    // collide with visited
-    if level_state.visited[dest_i]:
+    if is_coord_visited(level_state, dest_coord):
         return false
         
     // collide with other trucks
@@ -24,6 +21,11 @@ def can_move(level_state, player_state, dest_coord):
             return false
     
     return true
+
+def is_coord_visited(level_state, coord):
+    const dest_i = to_index(level_state.size, coord)
+    return level_state.visited[dest_i]
+        
 
 def is_level_done(level_state):
     for i < size(level_state.trucks):

@@ -2,8 +2,9 @@ PlayLevel
 ════════════════════════════════════════════════════════════════════════
 
 let level_state
+let level_element
 let player_state
-
+let input_block
 
 def init_level_state(level):
     let level_state = deep_clone(level)
@@ -12,6 +13,20 @@ def init_level_state(level):
     for i < num_tiles:
         push(level_state.visited, false)
     return level_state
+    
+def init_level_element(level_state):
+    let level_elem = {
+        state: level_state,
+        trucks: [],
+    }
+    for truck in level_state.trucks:
+        let truck_elem = {
+            offset: xy(0, 0),
+            state: truck,
+        }
+        push(level_elem.trucks, truck_elem)
+    
+    return level_elem
         
 def screen_to_board_coord(screen_xy):
     const offset = BOARD_OFFSET
@@ -19,18 +34,46 @@ def screen_to_board_coord(screen_xy):
 
 def copy_level_state(level_state):
     return deep_clone(level_state)
+
+def update_curr_path(level_state, player_state):
+    let path = player_state.path
+    if is_long_press():
+        if size(path) == 0:
+            push(path, screen_to_board_coord(curr_drag.start_pos))
+            
+        // look at the current
+        const coord = screen_to_board_coord(cursor_hover)
+        if not is_on_board(level_state.size, coord) or is_coord_visited(level_state, coord):
+            return
+        
+        const last_coord = last_value(path)
+        if manhattan(last_coord - coord) == 1:
+            let found = find_eq(path, coord)
+            if found ≠ ∅:
+                if found == size(path)-2:
+                    pop(path)
+            else:
+                push(path, coord)
+
+    else:
+        player_state.last_path = path
+        player_state.path = []
     
 def handle_player_input(gamepad):
+    debug_watch(input_block)
     let actions = {}
+    if input_block.flag:
+        return actions
+    
     if is_click():
         const coord = screen_to_board_coord(cursor_hover)
         actions.select = coord
-        
-    if is_long_press():
-        actions.select = screen_to_board_coord(curr_drag.start_pos)
-
+    
+    let long_ended = long_press_ended()
+    if long_ended:
+        actions.select = screen_to_board_coord(long_ended.start_pos)
         const coord = screen_to_board_coord(cursor_hover)
-        actions.move_to = coord
+        actions.move_path = true
         
     if gamepad.xx or gamepad.yy:
         actions.move = x_or_y(xy(gamepad.xx, gamepad.yy))
@@ -46,7 +89,8 @@ def handle_player_input(gamepad):
             
     return actions
     
-def update_state(level_state, player_state, actions):
+def update_state(level_elem, player_state, actions):
+    const level_state = level_elem.state
     if actions.reset_level:
         set_mode(PlayLevel, player_state.undo_stack[0])
         
@@ -68,24 +112,106 @@ def update_state(level_state, player_state, actions):
                     push(player_state.undo_stack, copy_level_state(level_state))
                 player_state.curr_truck = player_idx
 
-    if actions.move_to or actions.move:
-        const curr_truck = level_state.trucks[player_state.curr_truck]
-        let dest_coord = actions.move_to
-        if not dest_coord:
-            const move_dir = actions.move
-            dest_coord = curr_truck.coord + move_dir
+    if actions.move_path or actions.move:
+        const curr_truck_elem = level_elem.trucks[player_state.curr_truck]
+        if actions.move_path:
+            debug_print(player_state.path)
+            move_path(input_block, level_elem, curr_truck_elem, player_state.last_path)
+        else:
+            const curr_truck_elem = level_elem.trucks[player_state.curr_truck]
+            let dest_coord = actions.move_path
+            if not dest_coord:
+                const move_dir = actions.move
+                dest_coord = curr_truck_elem.state.coord + move_dir
+    
+            if can_move(level_state, player_state, dest_coord):
+                move_path(input_block, level_elem, curr_truck_elem, [
+                    curr_truck_elem.state.coord,
+                    dest_coord,
+                ])
 
-        if can_move(level_state, player_state, dest_coord):
-            const curr_i = to_index(level_state.size, curr_truck.coord)
-            level_state.visited[curr_i] = true
-            curr_truck.coord = dest_coord       
+def move_path(input_block, level_elem, truck_elem, path):
+    if size(path) < 2:
+        return
+    
+    input_block.flag += 1
+
+    let moves = []
+
+    let last = path[0]
+    assert(eq(last, truck_elem.state.coord))
+    for 0 < i < size(path):
+        let curr = path[i]
+        const dir = curr-last
+        debug_print(dir)
+        extend(moves, sequence_move(level_elem, truck_elem, dir))
+        last = curr
+    
+    def move_path_done(data):
+        data.input_block.flag -= 1
         
+    sequence(...moves,
+    {
+        end_callback: move_path_done,
+        frames: 1,
+        data: {
+            input_block: input_block,
+        },
+    })
+
+def sequence_move(level_elem, truck_elem, dir):
+    
+    const start_offset = -dir * TILE_SIZE
+    
+    def move_enter(data):
+        const start_offset = data.start_offset
+        const level_state = data.level_state
+        level_state.visited[to_index(level_state.size, truck_elem.state.coord)] = true
+        truck_elem.state.coord += data.dir
+        truck_elem.offset = start_offset
+    
+    def move_frame(frames_left, total_frames, data):
+        const t = smoothstep(total_frames, 0, frames_left)
+        let truck_elem = data.truck_elem
+        const start_offset = data.start_offset
+        truck_elem.offset = lerp(start_offset, xy(0, 0), t)
+        
+    def move_leave(data):
+        
+    const data = {
+        truck_elem: truck_elem,
+        level_state: level_elem.state,
+        dir: dir,
+        start_offset: start_offset,
+    }
+    
+    return [
+        {
+            end_callback: move_enter,
+            frames: 1,
+            data: data,
+        },
+        {
+            callback: move_frame,
+            end_callback: move_leave,
+            frames: FRAMES_MOVE,
+            data: data,
+        },
+    ]
+    
 
 enter(level_state_)
 ────────────────────────────────────────────────────────────────────────
+set_background(BACKGROUND_COLOR)
+
 player_state = {
     curr_truck: 0,
     undo_stack: [],
+    path: [],
+}
+
+input_block = {
+    flag: 0,
 }
 
 if level_state_:
@@ -99,8 +225,7 @@ else:
         level_state = init_level_state(level)
     
 push(player_state.undo_stack, copy_level_state(level_state))
-set_background(BACKGROUND_COLOR)
-
+level_element = init_level_element(level_state)
 
 frame
 ────────────────────────────────────────────────────────────────────────
@@ -112,7 +237,8 @@ draw_rect({
     color: #333,
 })
 
-check_level(level_state)
+update_curr_path(level_state, player_state)
+
 let actions = handle_player_input(gamepad_array[0])
 
 if actions.undo:
@@ -124,8 +250,12 @@ if actions.undo:
         level_state = pop(player_state.undo_stack)
     else:
         level_state = copy_level_state(last_value(player_state.undo_stack))
-        
-update_state(level_state, player_state, actions)
-draw_game(level_state, player_state)
+    level_element = init_level_element(level_state)
+
+if not input_block.flag:
+    check_level(level_state)      
+    
+update_state(level_element, player_state, actions)
+draw_game(level_element, player_state)
 
 update_curr_drag()

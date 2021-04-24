@@ -131,6 +131,21 @@
                 }
             },
             "description": "Color of the level text"
+        },
+        "FRAMES_MOVE": {
+            "type": "number",
+            "value": "8",
+            "description": "How many frames does it take to move.",
+            "min": {
+                "type": "number",
+                "value": "1"
+            },
+            "max": {
+                "type": "number",
+                "value": "60"
+            },
+            "format": "",
+            "quantum": 0
         }
     },
     "cooperative": false,

@@ -51,3 +51,9 @@ def is_between(x, lo, hi):
 // returns true if coord is on standard grid of grid_size    
 def is_on_board(grid_size, coord):
     return is_between(coord.x, 0, grid_size.x-1) and is_between(coord.y, 0, grid_size.y-1)
+    
+def find_eq(arr, v):
+    for i < size(arr):
+        if eq_recursive(arr[i], v):
+            return i
+    return ∅

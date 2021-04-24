@@ -1,5 +1,6 @@
 // Scripts, variables, and constants here are visible to all modes
-let curr_drag = ∅ 
+let curr_drag = ∅
+let drag_ended = ∅
 let cursor_hover = xy(0, 0)
 
 def update_cursor_hover():
@@ -9,6 +10,8 @@ def update_cursor_hover():
         
 
 def update_curr_drag():
+    drag_ended = ∅
+
     if touch.pressed_a and not curr_drag:
         curr_drag = {
             start_frame: mode_frames,
@@ -16,6 +19,7 @@ def update_curr_drag():
         }
     
     if touch.released_a:
+        drag_ended = curr_drag
         curr_drag = ∅
     
     
@@ -32,3 +36,6 @@ def is_click():
 
 def is_long_press():
     return curr_drag and curr_drag.start_frame < mode_frames - FRAMES_LONG_PRESS
+    
+def long_press_ended():
+    return drag_ended
