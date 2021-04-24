@@ -1,0 +1,26 @@
+{
+    "title": "ld48-mrawde",
+    "developer": "Your Name Here",
+    "copyright": "©2021 Your Name Here",
+    "license": "CC0/Public Domain (Replace with your own license)",
+    "packages": [],
+    "scripts": [],
+    "modes": [
+        "Play"
+    ],
+    "start_mode": "Play",
+    "docs": [],
+    "assets": {
+        "font": "quad://fonts/deja-8.font.json"
+    },
+    "version": 0,
+    "min_players": 1,
+    "max_players": 1,
+    "cooperative": false,
+    "competitive": false,
+    "achievements": false,
+    "highscores": false,
+    "description": "Description of your game in about 100 characters.",
+    "constants": {},
+    "screenshot_tag": "ld48-mrawde"
+}
