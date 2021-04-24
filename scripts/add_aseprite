@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import subprocess
+QUADPLAY_ROOT="/Users/Ed/projects/quadplay-dev"
+
+ASEPRITE_BIN = '/Users/Ed/Library/Application\ Support/Steam/steamapps/common/Aseprite/Aseprite.app/Contents/MacOS/aseprite'
+
+def find_binary(name):
+    return os.path.join(QUADPLAY_ROOT, "tools", name)
+
+def go(aseprite, size):
+    b = find_binary('sprite_json_generator.py')
+    subprocess.check_call([
+        b, '--aseprite', aseprite,
+        '--size', size[0], size[1],
+        '--new'])
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('aseprite')
+    parser.add_argument('size', nargs=2)
+    args = parser.parse_args()
+    go(args.aseprite, args.size)
