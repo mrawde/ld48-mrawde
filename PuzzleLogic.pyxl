@@ -1,9 +1,7 @@
 // implements the numberlink logic
     
 def can_move(level_state, player_state, dest_coord):
-    if not is_on_board(level_state.size, dest_coord):
-        return false
-        
+
     const curr_truck = level_state.trucks[player_state.curr_truck]
     if manhattan(curr_truck.coord - dest_coord) != 1:
         return false
@@ -12,20 +10,26 @@ def can_move(level_state, player_state, dest_coord):
     if eq(curr_truck.coord, curr_goal.coord):
         return false
         
-    if is_coord_visited(level_state, dest_coord):
+    if not is_coord_valid_for_move(level_state, dest_coord):
+        return false
+
+    return true
+
+def is_coord_valid_for_move(level_state, coord):
+    if not is_on_board(level_state.size, coord):
+        return false
+        
+    const dest_i = to_index(level_state.size, coord)
+    if level_state.visited[dest_i]:
         return false
         
     // collide with other trucks
     for truck in level_state.trucks:
-        if eq(truck.coord, dest_coord):
+        if eq(truck.coord, coord):
             return false
-    
+            
     return true
-
-def is_coord_visited(level_state, coord):
-    const dest_i = to_index(level_state.size, coord)
-    return level_state.visited[dest_i]
-        
+           
 
 def is_level_done(level_state):
     for i < size(level_state.trucks):
