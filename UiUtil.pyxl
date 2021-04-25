@@ -71,7 +71,7 @@ def is_in_corner_box(pos, corner_box):
 def button_clicked(args):
     const state = button_state(args)
     return state.clicked
-    
+
 // Draws a button.
 // returns a dict with:
 // .hover   - true if mouse is over
@@ -86,7 +86,7 @@ def button_state(args):
     const long_press_ended = long_press and touch.released_a
     const long_press_started_here = (long_press and is_in_corner_box(curr_drag.start_pos, args))
     const active = not disabled and ((hover and touch.a) or long_press_started_here)
-    
+            
     preserving_transform:
         if active:
             compose_transform({
@@ -162,7 +162,7 @@ def button_state(args):
     
     return {
         hover: hover,
-        clicked: hover and (is_click() or (long_press_ended and long_press_started_here)),
+        clicked: not disabled and hover and (is_click() or (long_press_ended and long_press_started_here)),
         active: active,
         text: args.text,
         alt: args.alt,

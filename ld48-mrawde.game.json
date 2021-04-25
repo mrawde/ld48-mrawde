@@ -112,15 +112,15 @@
                 },
                 "b": {
                     "type": "number",
-                    "value": "100%"
+                    "value": "9%"
                 },
                 "g": {
                     "type": "number",
-                    "value": "100%"
+                    "value": "7%"
                 },
                 "r": {
                     "type": "number",
-                    "value": "100%"
+                    "value": "5%"
                 }
             }
         },
