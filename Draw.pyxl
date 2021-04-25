@@ -80,6 +80,16 @@ def draw_truck(truck_elem, truck_color, is_current):
     const anim = truck_elem.anim
     const sprite = Truck_sprite[anim].frame(frame_t)
     const sprite_pos = corner + ½ TILE_SIZE
+    
+    if is_current:
+        for o in [xy(1, 0), xy(-1, 0), xy(0, 1), xy(0, -1)]:
+            draw_sprite({
+                sprite:sprite,
+                pos: sprite_pos + o,
+                override_color: SELECT_OUTLINE_COLOR,
+                angle: angle,
+                z: Z_TRUCK,
+            })
     draw_sprite({
         sprite: sprite,
         pos: sprite_pos,

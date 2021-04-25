@@ -70,7 +70,7 @@
             },
             "quantum": 0,
             "type": "number",
-            "value": "-17.600000000000023"
+            "value": "-96"
         },
         "BG_Y_FINAL": {
             "format": "",
@@ -98,7 +98,7 @@
             },
             "quantum": 0,
             "type": "number",
-            "value": "-190.39999999999998"
+            "value": "-217.59999999999997"
         },
         "BG_Y_START": {
             "description": "When the game starts, where is the bg Y",
@@ -127,7 +127,7 @@
             },
             "quantum": 0,
             "type": "number",
-            "value": "75.20000000000005"
+            "value": "19.200000000000045"
         },
         "BOARD_OFFSET": {
             "description": "offset from the screen for tile[0,0]",
@@ -493,6 +493,27 @@
                 }
             }
         },
+        "SELECT_OUTLINE_COLOR": {
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            }
+        },
         "SOUND_MOVE_VOLUME": {
             "description": "How loud the move sound effect is",
             "format": "",
@@ -611,7 +632,7 @@
         }
     },
     "cooperative": false,
-    "copyright": "©2021 Your Name Here",
+    "copyright": "\u00a92021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],
