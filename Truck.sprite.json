@@ -5,16 +5,31 @@
     "names": {
         "idle": {
             "end": {
-                "x": 1.0,
+                "x": 0.0,
+                "y": 0.0
+            },
+            "extrapolate": "oscillate",
+            "frames": [
+                6.0
+            ],
+            "start": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        "running": {
+            "end": {
+                "x": 4.0,
                 "y": 0.0
             },
             "extrapolate": "oscillate",
             "frames": [
                 6.0,
+                6.0,
                 6.0
             ],
             "start": {
-                "x": 0.0,
+                "x": 2.0,
                 "y": 0.0
             }
         }

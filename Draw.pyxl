@@ -11,7 +11,7 @@ const HUD_LEVEL_FONT = font
 const GROUND_COLOR = get_sprite_pixel_color(GroundTiles_sprite[0][0], xy(0, 0))
 
 def draw_game(level_elem, player_state):
-    draw_level(level_elem)
+    draw_level(level_elem, player_state)
     draw_hud(game_progress)
     
     preserving_transform:
@@ -20,7 +20,7 @@ def draw_game(level_elem, player_state):
         })
         draw_path(player_state.path, SECONDARY_COLORS[player_state.curr_truck])
     
-def draw_level(level_elem) preserving_transform:
+def draw_level(level_elem, player_state) preserving_transform:
     compose_transform({
         pos: BOARD_OFFSET,
     })
@@ -53,7 +53,8 @@ def draw_level(level_elem) preserving_transform:
     for i < size(trucks):
         const truck_elem = trucks[i]
         const truck_color = COLORS[i]
-        draw_truck(truck_elem, truck_color)
+        const is_current = i == player_state.curr_truck
+        draw_truck(truck_elem, truck_color, is_current)
     
     /*
     const curr_truck = player_state.curr_truck
@@ -65,14 +66,20 @@ def draw_level(level_elem) preserving_transform:
     })
     */
         
-def draw_truck(truck_elem, truck_color):
-    const offset = truck_elem.offset
+def draw_truck(truck_elem, truck_color, is_current):
+    const frame_t = mode_frames / 30
+
+    const jitter = if is_current then xy(oscillate(mode_frames * 0.5, -0.5, 0.5), 0) else xy(0, 0)
+    const offset = truck_elem.offset + jitter
+    const angle = truck_elem.angle
     const corner = truck_elem.state.coord * TILE_SIZE + offset
-    const sprite = Truck_sprite.idle.frame(0)
+    const anim = truck_elem.anim
+    const sprite = Truck_sprite[anim].frame(frame_t)
     const sprite_pos = corner + ½ TILE_SIZE
     draw_sprite({
         sprite: sprite,
-        pos: sprite_pos, 
+        pos: sprite_pos,
+        angle: angle,
         z: Z_TRUCK,
     })
     

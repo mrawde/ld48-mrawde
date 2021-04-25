@@ -166,19 +166,19 @@
             "url": "TutorialLevels.yml"
         },
         "Z_PATH": {
+            "description": "Z for the path drawing",
             "type": "number",
-            "value": "1",
-            "description": "Z for the path drawing"
-        },
-        "Z_TRUCK": {
-            "type": "number",
-            "value": "2",
-            "description": "Z for the trucks"
+            "value": "1"
         },
         "Z_TILE": {
+            "description": "Z for the ground tiles",
             "type": "number",
-            "value": "0",
-            "description": "Z for the ground tiles"
+            "value": "0"
+        },
+        "Z_TRUCK": {
+            "description": "Z for the trucks",
+            "type": "number",
+            "value": "2"
         }
     },
     "cooperative": false,

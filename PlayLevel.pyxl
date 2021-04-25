@@ -24,7 +24,9 @@ def init_level_element(level_state):
         let truck_elem = {
             which: i,
             offset: xy(0, 0),
+            angle: 0°,
             state: truck,
+            anim: "idle",
         }
         push(level_elem.trucks, truck_elem)
     
@@ -51,6 +53,7 @@ def update_curr_path(level_state, player_state):
             or not is_coord_valid_for_move(level_state, coord)):
             return
         
+        todo("don't let path move through goal")
         const last_coord = last_value(path)
         if manhattan(last_coord - coord) == 1:
             let found = find_eq(path, coord)
@@ -174,16 +177,48 @@ def move_path(input_block, level_elem, truck_elem, path):
         },
     })
 
+def angle_for_dir(dir):
+    if eq(dir, xy(1, 0)):
+        return 0°
+    if eq(dir, xy(0, -1)):
+        return 90° 
+    if eq(dir, xy(-1, 0)):
+        return 180° 
+    if eq(dir, xy(0, 1)):
+        return 270°
+
+def shorter_angle_diff(a, b):
+    // assumes both a and b are [0, 360)
+    let diff = a - b
+    while diff > 360°:
+        diff -= 360°
+    while diff < -360°:
+        diff += 360°
+        
+    if diff > 180°:
+        diff -= 360°
+    else if diff < -180°:
+        diff += 360°
+        
+    return diff
+        
+
 def sequence_move(level_elem, truck_elem, dir):
+    
+    const target_angle = angle_for_dir(dir)
     
     const start_offset = -dir * TILE_SIZE
     
     def move_enter(data):
         const start_offset = data.start_offset
         const level_state = data.level_state
+        const truck_elem = data.truck_elem
+        const target_angle = data.target_angle
         level_state.visited[to_index(level_state.size, truck_elem.state.coord)] = true
         truck_elem.state.coord += data.dir
         truck_elem.offset = start_offset
+        truck_elem.angle = target_angle
+        truck_elem.anim = "running"
     
     def move_frame(frames_left, total_frames, data):
         const t = smoothstep(total_frames, 0, frames_left)
@@ -192,10 +227,12 @@ def sequence_move(level_elem, truck_elem, dir):
         truck_elem.offset = lerp(start_offset, xy(0, 0), t)
         
     def move_leave(data):
+        truck_elem.anim = "idle"
         
-    const data = {
+    const move_data = {
         truck_elem: truck_elem,
         level_state: level_elem.state,
+        target_angle: target_angle,
         dir: dir,
         start_offset: start_offset,
     }
@@ -204,13 +241,13 @@ def sequence_move(level_elem, truck_elem, dir):
         {
             end_callback: move_enter,
             frames: 1,
-            data: data,
+            data: move_data,
         },
         {
             callback: move_frame,
             end_callback: move_leave,
             frames: FRAMES_MOVE,
-            data: data,
+            data: move_data,
         },
     ]
     
