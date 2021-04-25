@@ -397,7 +397,6 @@ enter(level_state_)
 set_background(TitleScreen_sprite)
 device_control("set_mouse_cursor", "none")
 
-debug_print(game_progress)
 player_state = {
     curr_truck: 0,
     undo_stack: [],

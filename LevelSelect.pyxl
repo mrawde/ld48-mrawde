@@ -107,7 +107,6 @@ enter
 // This event runs when the mode is entered via set_mode() or push_mode().
 device_control("set_mouse_cursor", "none")
 set_background(TitleScreen_sprite)
-debug_print(game_progress)
 
 player_state = {
     pack_idx: 0,

@@ -31,8 +31,6 @@ def advance_game_progress(game_progress):
         game_progress.curr_level_idx = 0
         const next_pack = PACKS[game_progress.curr_pack_idx]
         game_progress.farthest[next_pack.id] = 0
-        
-    debug_print(game_progress)
     save_local("progress", game_progress)
     
 let game_progress = init_game_progress()
