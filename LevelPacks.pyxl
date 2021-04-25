@@ -53,6 +53,7 @@ def load_level_from_string(level_str):
    
 def create_level_pack_from_data(data):
     let pack = {
+        id: data.id,
         name: data.name,
         levels: []
     }
@@ -60,6 +61,7 @@ def create_level_pack_from_data(data):
         const level_data = data.levels[i]
         const board_str = level_data.board
         let level = load_level_from_string(board_str)
+        level.text = level_data.text or ""
         level.num = i+1
         push(pack.levels, level)
     return pack

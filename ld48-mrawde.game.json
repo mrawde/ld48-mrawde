@@ -2,15 +2,16 @@
     "achievements": false,
     "assets": {
         "BackgroundMusic_sound": "BackgroundMusic.sound.json",
+        "Click_sound": "Click.sound.json",
         "Cursor_sprite": "Cursor.sprite.json",
+        "Goal_sound": "Goal.sound.json",
         "GroundTiles_sprite": "GroundTiles.sprite.json",
+        "Move_sound": "Move.sound.json",
         "TeamColors_sprite": "TeamColors.sprite.json",
         "TitleScreen_sprite": "TitleScreen.sprite.json",
         "Truck_sprite": "Truck.sprite.json",
-        "font": "quad://fonts/deja-8.font.json",
-        "Goal_sound": "Goal.sound.json",
-        "Move_sound": "Move.sound.json",
-        "Click_sound": "Click.sound.json"
+        "deja_8_font": "quad://fonts/deja-8.font.json",
+        "weaver_10_font": "quad://fonts/weaver-10.font.json"
     },
     "competitive": false,
     "constants": {
@@ -32,6 +33,17 @@
                 }
             }
         },
+        "BACKGROUND_LOOP_FRAMES": {
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "+infinity"
+            },
+            "min": 0,
+            "quantum": 0,
+            "type": "number",
+            "value": "484"
+        },
         "BOARD_OFFSET": {
             "description": "offset from the screen for tile[0,0]",
             "nudge": {
@@ -42,7 +54,7 @@
             "value": {
                 "x": {
                     "type": "number",
-                    "value": "100"
+                    "value": "50"
                 },
                 "y": {
                     "type": "number",
@@ -60,11 +72,11 @@
             "value": {
                 "x": {
                     "type": "number",
-                    "value": "100"
+                    "value": "50"
                 },
                 "y": {
                     "type": "number",
-                    "value": "200"
+                    "value": "205"
                 }
             }
         },
@@ -184,7 +196,7 @@
             "min": 0,
             "quantum": 0,
             "type": "number",
-            "value": "6"
+            "value": "5"
         },
         "FRAMES_MOVE": {
             "description": "How many frames does it take to move.",
@@ -233,17 +245,160 @@
             "value": {
                 "x": {
                     "type": "number",
-                    "value": "310"
+                    "value": "260"
                 },
                 "y": {
                     "type": "number",
-                    "value": "30"
+                    "value": "20"
                 }
             }
+        },
+        "HUD_TEXT_COLOR": {
+            "description": "Color of flavor text",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            }
+        },
+        "LEVEL_DONE_FILL_COLOR": {
+            "description": "Color if a level is done",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            }
+        },
+        "LEVEL_SELECT_COLOR": {
+            "description": "Main color on level select page",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            }
+        },
+        "LEVEL_SELECT_OFFSET": {
+            "nudge": {
+                "x": "+10",
+                "y": "-10"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "30"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "100"
+                }
+            }
+        },
+        "LEVEL_SELECT_SIZE": {
+            "description": "Size of the button on the level select screen",
+            "nudge": {
+                "x": "+10",
+                "y": "-10"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "16"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "16"
+                }
+            }
+        },
+        "SOUND_MOVE_VOLUME": {
+            "description": "How loud the move sound effect is",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "1"
+            },
+            "min": 0,
+            "quantum": 0,
+            "type": "number",
+            "value": "0.301"
         },
         "TESTLEVELS_YAML": {
             "type": "raw",
             "url": "TestLevels.yml"
+        },
+        "TEXT_BOX_OFFSET": {
+            "description": "where the text goes",
+            "nudge": {
+                "x": "+10",
+                "y": "-10"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "260"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "70"
+                }
+            }
+        },
+        "TEXT_BOX_WIDTH": {
+            "description": "How wide the text box is",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "300"
+            },
+            "min": 0,
+            "quantum": 0,
+            "type": "number",
+            "value": "116.39999999999999"
         },
         "TILE_SIZE": {
             "description": "Dimension of each tile.",
@@ -313,21 +468,10 @@
             "description": "Z for the trucks",
             "type": "number",
             "value": "2"
-        },
-        "BACKGROUND_LOOP_FRAMES": {
-            "type": "number",
-            "value": "484",
-            "min": 0,
-            "max": {
-                "type": "number",
-                "value": "+infinity"
-            },
-            "format": "",
-            "quantum": 0
         }
     },
     "cooperative": false,
-    "copyright": "©2021 Your Name Here",
+    "copyright": "\u00a92021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],
@@ -353,7 +497,7 @@
         "PuzzleLogic.pyxl",
         "Music.pyxl"
     ],
-    "start_mode": "TitleScreen",
+    "start_mode": "LevelSelect",
     "title": "ld48-mrawde",
     "version": 0
 }

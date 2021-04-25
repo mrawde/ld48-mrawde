@@ -7,7 +7,9 @@ def init_colors_from_sprite(row):
     return colors
 const COLORS = init_colors_from_sprite(1)
 const SECONDARY_COLORS = init_colors_from_sprite(0)
-const HUD_LEVEL_FONT = font
+const HUD_LEVEL_FONT = weaver_10_font
+const TEXT_FONT = deja_8_font
+
 const GROUND_COLOR = get_sprite_pixel_color(GroundTiles_sprite[0][0], xy(2, 1))
 
 def draw_game(level_elem, player_state):
@@ -55,16 +57,7 @@ def draw_level(level_elem, player_state) preserving_transform:
         const truck_color = COLORS[i]
         const is_current = i == player_state.curr_truck
         draw_truck(truck_elem, truck_color, is_current)
-    
-    /*
-    const curr_truck = player_state.curr_truck
-    const curr_coord = trucks[curr_truck].coord
-    draw_corner_rect({
-        corner: curr_coord * TILE_SIZE,
-        size: TILE_SIZE,
-        outline: #000,
-    })
-    */
+
         
 def draw_truck(truck_elem, truck_color, is_current):
     const frame_t = mode_frames / 30
@@ -136,8 +129,20 @@ def draw_hud(game_progress):
     draw_text({
         pos: HUD_LEVEL_OFFSET,
         font: HUD_LEVEL_FONT,
-        text: replace("N", {"N": level_num}),
+        text: replace("PACK\nN of TOTAL", {
+            "PACK": pack.name,
+            "N": level_num,
+            "TOTAL": size(pack.levels),
+        }),
         color: HUD_LEVEL_COLOR,
+    })
+    
+    draw_text({
+        pos: TEXT_BOX_OFFSET,
+        font: TEXT_FONT,
+        text: level.text,
+        wrap_width: TEXT_BOX_WIDTH,
+        color: HUD_TEXT_COLOR,
     })
         
 def draw_path(path, color) preserving_transform:

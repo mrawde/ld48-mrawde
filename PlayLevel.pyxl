@@ -1,6 +1,5 @@
 PlayLevel
 ════════════════════════════════════════════════════════════════════════
-let bg_music
 let level_state
 let level_element
 let player_state
@@ -87,10 +86,16 @@ def handle_player_input(gamepad):
     const clicked_reset = button_state({
         corner: button_offset,
         size: BUTTON_SIZE,
-        text: replace("Reset (q)", gamepad.prompt),
+        text: replace("Reset (f)", gamepad.prompt),
     }).clicked
     button_offset.x += button_spacing    
-    
+    const clicked_level_select = button_state({
+        corner: button_offset,
+        size: BUTTON_SIZE,
+        text: replace("Level (q)", gamepad.prompt),
+    }).clicked
+    button_offset.x += button_spacing
+       
     if input_block.flag:
         return actions
     
@@ -115,12 +120,19 @@ def handle_player_input(gamepad):
     if clicked_undo or gamepad.ee:
         actions.undo = true
        
-    if clicked_reset or gamepad.qq:
+    if clicked_reset or gamepad.ff:
         actions.reset_level = true
+        
+    if clicked_level_select or gamepad.qq:
+        actions.level_select = true
+
             
     return actions
     
 def update_state(level_elem, player_state, actions):
+    if actions.level_select:
+        set_mode(LevelSelect)
+        
     const level_state = level_elem.state
     if actions.reset_level:
         set_mode(PlayLevel, player_state.undo_stack[0])
@@ -241,7 +253,10 @@ def sequence_move(level_elem, truck_elem, dir):
         truck_elem.offset = start_offset
         truck_elem.angle = target_angle
         truck_elem.anim = "running"
-        play_sound(Move_sound)
+        play_sound({
+            sound: Move_sound,
+            volume: SOUND_MOVE_VOLUME,
+        })
     
     def move_frame(frames_left, total_frames, data):
         const t = smoothstep(total_frames, 0, frames_left)
@@ -279,6 +294,10 @@ def sequence_move(level_elem, truck_elem, dir):
             data: move_data,
         },
     ]
+
+def leave_level():
+    
+def sequence_exit_level():
     
 
 enter(level_state_)
@@ -300,20 +319,19 @@ input_block = {
 if level_state_:
     level_state = level_state_
 else:
-    if game_progress.done:
-        set_mode(GameOver)
+    let level = ∅
+    if game_progress.curr_pack_idx ≥ size(PACKS):
+        set_mode(LevelSelect)
     else:
         const pack = PACKS[game_progress.curr_pack_idx]
-        const level = pack.levels[game_progress.curr_level_idx]
-        level_state = init_level_state(level)
-    
+        level = pack.levels[game_progress.curr_level_idx] 
+    level_state = init_level_state(level)
 push(player_state.undo_stack, copy_level_state(level_state))
 level_element = init_level_element(level_state)
 
 frame
 ────────────────────────────────────────────────────────────────────────
-if mode_frames mod BACKGROUND_LOOP_FRAMES == 0:
-    bg_music = play_sound(BackgroundMusic_sound)
+bg_music_per_frame()
 
 update_cursor_hover()
 draw_mouse_cursor()
@@ -340,4 +358,4 @@ update_curr_drag()
 
 leave
 ────────────────────────────────────────────────────────────────────────
-stop_audio(bg_music)
+update_curr_drag()

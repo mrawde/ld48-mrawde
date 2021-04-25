@@ -4,26 +4,35 @@ const PACKS = [
 ]
 
 def init_game_progress():
+    save_local("progress", {})
     let progress = load_local("progress")
-    progress = ∅
+    //progress = ∅
     if not progress:
         progress = {
             curr_pack_idx: 0,
             curr_level_idx: 0,
+            farthest: {},
             done: false,
         }
+        
+    if not progress.farthest:
+        progress.farthest = {}
+        
+    for pack in PACKS:
+        if not progress.farthest[pack.id]:
+            progress.farthest[pack.id] = 0
     return progress
         
     
 def advance_game_progress(game_progress):
     game_progress.curr_level_idx += 1
+    const pack = PACKS[game_progress.curr_pack_idx]
+    game_progress.farthest[pack.id] = max(game_progress.farthest[pack.id], game_progress.curr_level_idx)
     const num_levels_in_pack = size(PACKS[game_progress.curr_pack_idx].levels)
     if game_progress.curr_level_idx ≥ num_levels_in_pack:
         game_progress.curr_pack_idx += 1
         game_progress.curr_level_idx = 0
         
-        if game_progress.curr_pack_idx ≥ size(PACKS):
-            game_progress.done = true
     save_local("progress", game_progress)
     
 let game_progress = init_game_progress()

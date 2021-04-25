@@ -1,5 +1,4 @@
-def loop_music(sound, frames):
-    def play_and_loop():
-        play_sound(sound, false)
-        delay(play_and_loop, frames)
-    play_and_loop()
+let bg_music
+def bg_music_per_frame():
+    if game_frames mod BACKGROUND_LOOP_FRAMES == 0:
+        bg_music = play_sound(BackgroundMusic_sound)

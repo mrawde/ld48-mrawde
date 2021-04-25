@@ -79,7 +79,7 @@ def button_clicked(args):
 // .clicked - true if "clicked" this frame
 // .text    - if drawing an icon, this is the text that goes along with it
 def button_state(args):
-    const button_font = font
+    const button_font = deja_8_font
     const disabled = args.disabled
     const hover = is_in_corner_box(cursor_hover, args)
     const long_press = is_long_press()
@@ -97,11 +97,16 @@ def button_state(args):
                               then args.outline 
                               else BUTTON_OUTLINE_COLOR)
 
-        let fill_color = BUTTON_FILL_COLOR
-        if disabled:
-            fill_color = BUTTON_FILL_DISABLED_COLOR
-        if hover: 
-            fill_color = perceptual_lerp_color(fill_color, rgba(1, 1, 1, fill_color.a), 5%)
+
+        let fill_color = args.fill_color
+        
+        if not fill_color:
+            fill_color = BUTTON_FILL_COLOR
+            if disabled:
+                fill_color = BUTTON_FILL_DISABLED_COLOR
+            if hover: 
+                fill_color = perceptual_lerp_color(fill_color, rgba(1, 1, 1, fill_color.a), 5%)
+                
         draw_corner_rect({
             corner: args.corner,
             size: args.size,
@@ -109,9 +114,12 @@ def button_state(args):
             outline: button_outline,
         })
 
-        let text_color = BUTTON_TEXT_COLOR
-        if disabled:
+        let text_color = args.text_color
+        
+        if not text_color:
             text_color = BUTTON_TEXT_COLOR
+            if disabled:
+                text_color = BUTTON_TEXT_COLOR
 
         const sprite = args.sprite
         if sprite:
@@ -142,7 +150,7 @@ def button_state(args):
         else:
             const text_pos = args.corner + ½ args.size
             draw_text({
-                font: font,
+                font: button_font,
                 text: args.text,
                 pos: text_pos,
                 color: text_color,

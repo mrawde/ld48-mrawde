@@ -1,19 +1,4 @@
-name: "test"
-levels_:
-- board: |
-      A . . . . a
-      . . . . . .
-      . . . . . .
-      . . . . . .
-      . . . . . .
-      . . . . . .
-- board: |
-      A . . . . a
-      . . . . . .
-      . . . . . .
-      . . . . . .
-      . . . . . .
-      . . . . . .
+name: "Test"
 levels:
 - board: |
       E . . . . e
@@ -22,6 +7,7 @@ levels:
       . F A . b .
       . a . . . c
       d C . . . B
+  text: "Welcome to Mars."
 - board: |
       e . . . . E
       . . . . . D
@@ -29,3 +15,10 @@ levels:
       . F A . b .
       . a . . . c
       d C . . . B
+- board: |
+      A . . . . a
+      . . . . . .
+      . . . . . .
+      . . . . . .
+      . . . . . .
+      . . . . . .

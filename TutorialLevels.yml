@@ -1,6 +1,21 @@
-name: "tutorial"
+id: "tutorial"
+name: "Tutorial"
 levels: 
 - board: |
+    . . .
     a . A
     . . .
-    . . .
+  text: "Drag excavators to collection sites."
+- board: |
+    a . . A
+    . . . .
+    . . . .
+    b . . B
+  text: "Each must end up at it's corresponding collection site."
+- board: |
+    . . . . .
+    . . B . .
+    a . . . A
+    . . . . .
+    b . . . .
+  text: "You can undo or reset if you get stuck."

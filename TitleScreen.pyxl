@@ -1,7 +1,6 @@
 TitleScreen
 ════════════════════════════════════════════════════════════════════════
 // Put local state for the mode here.  Declare variables with let, constants with const, and functions with def.
-let bg_music
 
 enter
 ────────────────────────────────────────────────────────────────────────
@@ -10,12 +9,10 @@ set_background(TitleScreen_sprite)
 
 frame
 ────────────────────────────────────────────────────────────────────────
-if mode_frames mod BACKGROUND_LOOP_FRAMES == 0:
-    bg_music = play_sound(BackgroundMusic_sound)
+bg_music_per_frame()
 
 if any_button_press():
-    set_mode(PlayLevel)
+    set_mode(LevelSelect)
 
 leave
 ────────────────────────────────────────────────────────────────────────
-stop_audio(bg_music)
