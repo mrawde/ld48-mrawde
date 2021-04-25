@@ -168,6 +168,8 @@ def update_state(level_elem, player_state, actions):
     
         if player_idx ≠ ∅:
             if player_state.curr_truck ≠ player_idx:
+                level_elem.trucks[player_state.curr_truck].angle = 0°
+
                 const last_state = last_value(player_state.undo_stack)
                 if not eq_recursive(level_state, last_state):
                     push(player_state.undo_stack, copy_level_state(level_state))
@@ -213,7 +215,7 @@ def move_path(input_block, level_elem, truck_elem, path):
         last = curr
     
     def move_path_done(data):
-        truck_elem.angle = 0° 
+        //truck_elem.angle = 0° 
         data.input_block.flag -= 1
         
     sequence(...moves,
