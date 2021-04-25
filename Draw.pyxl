@@ -9,6 +9,9 @@ const COLORS = init_colors_from_sprite(1)
 const SECONDARY_COLORS = init_colors_from_sprite(0)
 const HUD_LEVEL_FONT = weaver_10_font
 const TEXT_FONT = deja_8_font
+// this is a number on the truck/targets
+const INDICATOR_FONT = deja_6_font
+let show_indicator = true
 
 const GROUND_COLOR = get_sprite_pixel_color(GroundTiles_sprite[0][0], xy(2, 1))
 
@@ -108,6 +111,18 @@ def draw_truck(truck_elem, truck_color, is_current):
         z: Z_TRUCK,
     })
     
+    if show_indicator:
+        draw_text({
+            font: INDICATOR_FONT,
+            pos: sprite_pos - jitter,
+            text: replace("N", {N: which_truck + 1}),
+            x_align: "center",
+            y_align: "center",
+            color: #fff,
+            outline: outline,
+            z: Z_TRUCK,
+        })
+    
 def draw_goal(truck_idx, goal):
     const corner = goal.coord * TILE_SIZE
     const truck_color = COLORS[truck_idx]
@@ -142,6 +157,19 @@ def draw_goal(truck_idx, goal):
         outline: sec_color,
         z: z,
     })
+    
+    if show_indicator:
+        draw_text({
+            font: INDICATOR_FONT,
+            pos: sprite_pos,
+            text: replace("N", {N: truck_idx + 1}),
+            x_align: "center",
+            y_align: "center",
+            color: #fff,
+            outline: sec_color,
+            z: Z_TRUCK,
+        })
+    
 
 def draw_hud(game_progress):
     const pack = PACKS[game_progress.curr_pack_idx]
