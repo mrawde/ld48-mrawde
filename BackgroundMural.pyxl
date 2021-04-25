@@ -1,0 +1,27 @@
+const SKY_COLOR = get_sprite_pixel_color(BackgroundMural_sprite[0][0], xy(0, 0))
+set_background(SKY_COLOR)
+
+let target_y = 0
+let current_y = BG_Y_START
+
+def draw_mural():
+    debug_watch(target_y)
+    current_y = lerp(current_y, target_y, 0.1)
+    const sprite = BackgroundMural_sprite
+    const pos = ½ sprite.size + xy(0, current_y)
+    draw_sprite({
+        pos: pos,
+        sprite: sprite,
+        z: Z_BG,
+    })
+    
+def get_target_y_for_pack(pack_idx):
+    // can't use an array because the constant doesn't update
+    return [
+        BG_Y_START,
+        BG_Y_SURFACE,
+        BG_Y_CRUST,
+        BG_Y_MANTLE,
+        BG_Y_CORE,
+        BG_Y_FINAL,
+    ][pack_idx+1]

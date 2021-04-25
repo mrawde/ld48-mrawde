@@ -1,6 +1,7 @@
 {
     "achievements": false,
     "assets": {
+        "BackgroundMural_sprite": "BackgroundMural.sprite.json",
         "BackgroundMusic_sound": "BackgroundMusic.sound.json",
         "Click_sound": "Click.sound.json",
         "Cursor_sprite": "Cursor.sprite.json",
@@ -8,7 +9,6 @@
         "GroundTiles_sprite": "GroundTiles.sprite.json",
         "Move_sound": "Move.sound.json",
         "TeamColors_sprite": "TeamColors.sprite.json",
-        "TitleScreen_sprite": "TitleScreen.sprite.json",
         "Truck_sprite": "Truck.sprite.json",
         "deja_8_font": "quad://fonts/deja-8.font.json",
         "weaver_10_font": "quad://fonts/weaver-10.font.json"
@@ -43,6 +43,91 @@
             "quantum": 0,
             "type": "number",
             "value": "484"
+        },
+        "BG_Y_CORE": {
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "1000"
+            },
+            "min": {
+                "type": "number",
+                "value": "-600"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "-355.2"
+        },
+        "BG_Y_CRUST": {
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "1000"
+            },
+            "min": {
+                "type": "number",
+                "value": "-600"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "-17.600000000000023"
+        },
+        "BG_Y_FINAL": {
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "1000"
+            },
+            "min": {
+                "type": "number",
+                "value": "-600"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "52.900000000000006"
+        },
+        "BG_Y_MANTLE": {
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "1000"
+            },
+            "min": {
+                "type": "number",
+                "value": "-600"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "-190.39999999999998"
+        },
+        "BG_Y_START": {
+            "description": "When the game starts, where is the bg Y",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "1000"
+            },
+            "min": {
+                "type": "number",
+                "value": "-600"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "539.2"
+        },
+        "BG_Y_SURFACE": {
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "1000"
+            },
+            "min": {
+                "type": "number",
+                "value": "-600"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "75.20000000000005"
         },
         "BOARD_OFFSET": {
             "description": "offset from the screen for tile[0,0]",
@@ -186,6 +271,36 @@
                 }
             }
         },
+        "FRAMES_DIALOG": {
+            "description": "How many frames to show text per 10 chars.",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "100"
+            },
+            "min": {
+                "type": "number",
+                "value": "1"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "30"
+        },
+        "FRAMES_LEVEL_SLIDE": {
+            "description": "How long it takes for a level to slide in/out.",
+            "format": "",
+            "max": {
+                "type": "number",
+                "value": "600"
+            },
+            "min": {
+                "type": "number",
+                "value": "1"
+            },
+            "quantum": 0,
+            "type": "number",
+            "value": "20"
+        },
         "FRAMES_LONG_PRESS": {
             "description": "How long the touch/mouse is down to treat this as a long press.",
             "format": "",
@@ -275,6 +390,30 @@
                 }
             }
         },
+        "LEVELS_CORE_YAML": {
+            "type": "raw",
+            "url": "LevelsCore.yml"
+        },
+        "LEVELS_CRUST_YAML": {
+            "type": "raw",
+            "url": "LevelsCrust.yml"
+        },
+        "LEVELS_FINAL_YAML": {
+            "type": "raw",
+            "url": "LevelsFinal.yml"
+        },
+        "LEVELS_MANTLE_YAML": {
+            "type": "raw",
+            "url": "LevelsMantle.yml"
+        },
+        "LEVELS_SURFACE_YAML": {
+            "type": "raw",
+            "url": "LevelsSurface.yml"
+        },
+        "LEVELS_TEST_YAML": {
+            "type": "raw",
+            "url": "LevelsTest.yml"
+        },
         "LEVEL_SELECT_COLOR": {
             "description": "Main color on level select page",
             "type": "rgba",
@@ -297,6 +436,28 @@
                 }
             }
         },
+        "LEVEL_SELECT_DONE_COLOR": {
+            "description": "color for finished levels",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "0%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "85%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "33%"
+                }
+            }
+        },
         "LEVEL_SELECT_OFFSET": {
             "nudge": {
                 "x": "+10",
@@ -310,7 +471,7 @@
                 },
                 "y": {
                     "type": "number",
-                    "value": "80"
+                    "value": "40"
                 }
             }
         },
@@ -331,26 +492,6 @@
                     "value": "16"
                 }
             }
-        },
-        "LEVELS_TEST_YAML": {
-            "type": "raw",
-            "url": "LevelsTest.yml"
-        },
-        "LEVELS_SURFACE_YAML": {
-            "type": "raw",
-            "url": "LevelsSurface.yml"
-        },
-        "LEVELS_CRUST_YAML": {
-            "type": "raw",
-            "url": "LevelsCrust.yml"
-        },
-        "LEVELS_MANTLE_YAML": {
-            "type": "raw",
-            "url": "LevelsMantle.yml"
-        },
-        "LEVELS_CORE_YAML": {
-            "type": "raw",
-            "url": "LevelsCore.yml"
         },
         "SOUND_MOVE_VOLUME": {
             "description": "How loud the move sound effect is",
@@ -439,10 +580,19 @@
             "type": "number",
             "value": "6.085"
         },
+        "Z_BG": {
+            "type": "number",
+            "value": "-1"
+        },
         "Z_CURSOR": {
             "description": "Z for the mouse cursor",
             "type": "number",
             "value": "3"
+        },
+        "Z_LEVEL_END_TEXT": {
+            "description": "Z for end of message text.",
+            "type": "number",
+            "value": "2.5"
         },
         "Z_PATH": {
             "description": "Z for the path drawing",
@@ -458,63 +608,6 @@
             "description": "Z for the trucks",
             "type": "number",
             "value": "2"
-        },
-        "FRAMES_LEVEL_SLIDE": {
-            "type": "number",
-            "value": "20",
-            "description": "How long it takes for a level to slide in/out.",
-            "min": {
-                "type": "number",
-                "value": "1"
-            },
-            "max": {
-                "type": "number",
-                "value": "600"
-            },
-            "format": "",
-            "quantum": 0
-        },
-        "LEVEL_SELECT_DONE_COLOR": {
-            "type": "rgba",
-            "value": {
-                "r": {
-                    "type": "number",
-                    "value": "33%"
-                },
-                "g": {
-                    "type": "number",
-                    "value": "85%"
-                },
-                "b": {
-                    "type": "number",
-                    "value": "0%"
-                },
-                "a": {
-                    "type": "number",
-                    "value": "100%"
-                }
-            },
-            "description": "color for finished levels"
-        },
-        "Z_LEVEL_END_TEXT": {
-            "type": "number",
-            "value": "2.5",
-            "description": "Z for end of message text."
-        },
-        "FRAMES_DIALOG": {
-            "type": "number",
-            "value": "30",
-            "description": "How many frames to show text per 10 chars.",
-            "min": {
-                "type": "number",
-                "value": "1"
-            },
-            "max": {
-                "type": "number",
-                "value": "100"
-            },
-            "format": "",
-            "quantum": 0
         }
     },
     "cooperative": false,
@@ -539,7 +632,8 @@
         "GameProgress.pyxl",
         "Draw.pyxl",
         "PuzzleLogic.pyxl",
-        "Music.pyxl"
+        "Music.pyxl",
+        "BackgroundMural.pyxl"
     ],
     "start_mode": "LevelSelect",
     "title": "ld48-mrawde",

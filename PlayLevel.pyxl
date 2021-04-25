@@ -394,7 +394,7 @@ def advance_game_cb():
     
 enter(level_state_)
 ────────────────────────────────────────────────────────────────────────
-set_background(TitleScreen_sprite)
+//set_background(TitleScreen_sprite)
 device_control("set_mouse_cursor", "none")
 
 player_state = {
@@ -429,6 +429,7 @@ enter_level(player_state)
 frame
 ────────────────────────────────────────────────────────────────────────
 bg_music_per_frame()
+draw_mural()
 
 update_cursor_hover()
 draw_mouse_cursor()

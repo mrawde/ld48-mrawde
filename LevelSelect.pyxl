@@ -23,9 +23,10 @@ def handle_player_input(gamepad, player_state, game_progress):
             text: pack.name,
             color: level_text_color,
         })
+        const w = 10*1.125*LEVEL_SELECT_SIZE.x
         draw_line({
             A: xy(x_offset, y_offset-4),
-            B: xy(100, y_offset-4),
+            B: xy(x_offset + w, y_offset-4),
             color: level_text_color,
         })
         
@@ -78,6 +79,7 @@ def handle_player_input(gamepad, player_state, game_progress):
         pack = PACKS[player_state.pack_idx]
         
     player_state.level_idx = clamp(player_state.level_idx, 0, game_progress.farthest[pack.id])
+    target_y = get_target_y_for_pack(player_state.pack_idx)
 
     if gamepad.aa or gamepad.bb or gamepad.cc or gamepad.dd:
         actions.clicked = true
@@ -106,8 +108,9 @@ enter
 ────────────────────────────────────────────────────────────────────────
 // This event runs when the mode is entered via set_mode() or push_mode().
 device_control("set_mouse_cursor", "none")
-set_background(TitleScreen_sprite)
+//set_background(TitleScreen_sprite)
 
+target_y = 50
 player_state = {
     pack_idx: 0,
     level_idx: 0,
@@ -117,6 +120,8 @@ frame
 ────────────────────────────────────────────────────────────────────────
 // This event runs 60 times per second. Game logic, simulation, user input, and drawing all go here.
 bg_music_per_frame()
+draw_mural()
+
 update_cursor_hover()
 draw_mouse_cursor()
 

@@ -75,6 +75,7 @@ const SURFACE_LEVEL_PACK = create_level_pack_from_data(LEVELS_SURFACE_YAML)
 const CRUST_LEVEL_PACK = create_level_pack_from_data(LEVELS_CRUST_YAML)
 const MANTLE_LEVEL_PACK = create_level_pack_from_data(LEVELS_MANTLE_YAML)
 const CORE_LEVEL_PACK = create_level_pack_from_data(LEVELS_CORE_YAML)
+const FINAL_LEVEL_PACK = create_level_pack_from_data(LEVELS_FINAL_YAML)
 
 const PACKS = [
     // intro puzzles to teach the game
@@ -85,4 +86,6 @@ const PACKS = [
     MANTLE_LEVEL_PACK,
     // more 6x6 puzzles
     CORE_LEVEL_PACK,
+    // the end
+    FINAL_LEVEL_PACK
 ]
