@@ -496,7 +496,6 @@
     "min_players": 1,
     "modes": [
         "PlayLevel",
-        "TitleScreen",
         "LevelSelect"
     ],
     "packages": [],
