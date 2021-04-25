@@ -1,9 +1,10 @@
+const unlock_all = false
+
 def init_game_progress():
-    /*
-    if IDE_USER == "Ed":
+    
+    /*if IDE_USER == "Ed":
         debug_print("reseting progress!")
-        save_local("progress", {})
-        */
+        save_local("progress", {})*/
     let progress = load_local("progress")
     if not progress:
         progress = {
@@ -20,6 +21,8 @@ def init_game_progress():
         const pack = PACKS[i]
         if progress.farthest[pack.id] == ∅:
             progress.farthest[pack.id] = if i == 0 then 0 else -1
+            if unlock_all:
+                progress.farthest[pack.id] = size(pack.levels)
     return progress
         
     
@@ -33,6 +36,8 @@ def advance_game_progress(game_progress):
         game_progress.curr_level_idx = 0
         const next_pack = PACKS[game_progress.curr_pack_idx]
         game_progress.farthest[next_pack.id] = 0
-    save_local("progress", game_progress)
+        
+    if not unlock_all:
+        save_local("progress", game_progress)
     
 let game_progress = init_game_progress()

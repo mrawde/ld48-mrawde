@@ -156,6 +156,7 @@ def draw_hud(game_progress):
             "TOTAL": size(pack.levels),
         }),
         color: HUD_LEVEL_COLOR,
+        shadow: #000,
     })
     
     draw_text({

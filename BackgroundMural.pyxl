@@ -21,7 +21,7 @@ def draw_mural():
         x_align: "right",
         y_align: "bottom",
         font: credit_font,
-        text: "@MRAWDE\nfor LD48",
+        text: "@mrawde\nfor LD48",
         color: #fff,
     })
     

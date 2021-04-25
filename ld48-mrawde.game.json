@@ -12,7 +12,8 @@
         "Truck_sprite": "Truck.sprite.json",
         "deja_8_font": "quad://fonts/deja-8.font.json",
         "weaver_10_font": "quad://fonts/weaver-10.font.json",
-        "deja_6_font": "quad://fonts/deja-6.font.json"
+        "deja_6_font": "quad://fonts/deja-6.font.json",
+        "hauer_12_font": "quad://fonts/hauer-12.font.json"
     },
     "competitive": false,
     "constants": {
@@ -85,7 +86,7 @@
             },
             "quantum": 0,
             "type": "number",
-            "value": "52.900000000000006"
+            "value": "-441.6"
         },
         "BG_Y_MANTLE": {
             "format": "",
@@ -648,6 +649,32 @@
                 "x": "+1",
                 "y": "-1"
             }
+        },
+        "TITLE_OFFSET": {
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "260"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "129"
+                }
+            },
+            "description": "Where is the title",
+            "nudge": {
+                "x": "+1",
+                "y": "-1"
+            }
+        },
+        "TITLE_GAME_NAME": {
+            "type": "string",
+            "value": "LumenBrink"
+        },
+        "Z_TITLE_TEXT": {
+            "type": "number",
+            "value": "2.5"
         }
     },
     "cooperative": false,

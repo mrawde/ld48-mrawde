@@ -103,6 +103,15 @@ def handle_actions(player_state, actions):
         game_progress.curr_level_idx = player_state.level_idx
         set_mode(PlayLevel)
 
+def draw_title():
+    const title_font = hauer_12_font
+    draw_text({
+        font: title_font,
+        text: TITLE_GAME_NAME,
+        color: HUD_LEVEL_COLOR,
+        shadow: #000,
+        pos: TITLE_OFFSET,
+    })
 
 enter
 ────────────────────────────────────────────────────────────────────────
@@ -121,6 +130,7 @@ frame
 // This event runs 60 times per second. Game logic, simulation, user input, and drawing all go here.
 bg_music_per_frame()
 draw_mural()
+draw_title()
 
 update_cursor_hover()
 draw_mouse_cursor()
