@@ -10,10 +10,10 @@
         "Move_sound": "Move.sound.json",
         "TeamColors_sprite": "TeamColors.sprite.json",
         "Truck_sprite": "Truck.sprite.json",
-        "deja_8_font": "quad://fonts/deja-8.font.json",
-        "weaver_10_font": "quad://fonts/weaver-10.font.json",
         "deja_6_font": "quad://fonts/deja-6.font.json",
-        "hauer_12_font": "quad://fonts/hauer-12.font.json"
+        "deja_8_font": "quad://fonts/deja-8.font.json",
+        "hauer_12_font": "quad://fonts/hauer-12.font.json",
+        "weaver_10_font": "quad://fonts/weaver-10.font.json"
     },
     "competitive": false,
     "constants": {
@@ -270,6 +270,24 @@
                 "r": {
                     "type": "number",
                     "value": "100%"
+                }
+            }
+        },
+        "CREDIT_OFFSET": {
+            "description": "Where to draw credits",
+            "nudge": {
+                "x": "+1",
+                "y": "-1"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "-5"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "-2"
                 }
             }
         },
@@ -576,6 +594,28 @@
                 }
             }
         },
+        "TITLE_GAME_NAME": {
+            "type": "string",
+            "value": "LumenBrink"
+        },
+        "TITLE_OFFSET": {
+            "description": "Where is the title",
+            "nudge": {
+                "x": "+1",
+                "y": "-1"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "260"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "129"
+                }
+            }
+        },
         "TOUCH_CLICK_RADIUS": {
             "description": "Radius where the mouse needs to be released within to count as a touch/click.",
             "format": "",
@@ -627,58 +667,18 @@
             "type": "number",
             "value": "0"
         },
+        "Z_TITLE_TEXT": {
+            "type": "number",
+            "value": "2.5"
+        },
         "Z_TRUCK": {
             "description": "Z for the trucks",
             "type": "number",
             "value": "2"
-        },
-        "CREDIT_OFFSET": {
-            "type": "xy",
-            "value": {
-                "x": {
-                    "type": "number",
-                    "value": "-5"
-                },
-                "y": {
-                    "type": "number",
-                    "value": "-2"
-                }
-            },
-            "description": "Where to draw credits",
-            "nudge": {
-                "x": "+1",
-                "y": "-1"
-            }
-        },
-        "TITLE_OFFSET": {
-            "type": "xy",
-            "value": {
-                "x": {
-                    "type": "number",
-                    "value": "260"
-                },
-                "y": {
-                    "type": "number",
-                    "value": "129"
-                }
-            },
-            "description": "Where is the title",
-            "nudge": {
-                "x": "+1",
-                "y": "-1"
-            }
-        },
-        "TITLE_GAME_NAME": {
-            "type": "string",
-            "value": "LumenBrink"
-        },
-        "Z_TITLE_TEXT": {
-            "type": "number",
-            "value": "2.5"
         }
     },
     "cooperative": false,
-    "copyright": "©2021 Your Name Here",
+    "copyright": "\u00a92021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],
