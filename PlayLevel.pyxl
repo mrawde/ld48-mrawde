@@ -283,6 +283,7 @@ def sequence_move(level_elem, truck_elem, dir):
         const truck_elem = data.truck_elem
         const truck_idx = truck_elem.which
         if is_truck_at_goal(level_state, truck_idx):
+            data.level_state.visited[to_index(level_state.size, truck_elem.state.coord)] = true
             play_sound(Goal_sound)
 
         truck_elem.anim = "idle"

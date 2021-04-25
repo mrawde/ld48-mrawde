@@ -49,4 +49,13 @@ def is_level_done(level_state):
         const goal = level_state.goals[i]
         if not eq(truck.coord, goal.coord):
             return false
+    
+    // special case the first level        
+    if level_state.id == "surface_0":
+        return true
+    
+    for visit in level_state.visited:
+        if not visit:
+            return false
+
     return true

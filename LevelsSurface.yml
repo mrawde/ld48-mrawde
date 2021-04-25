@@ -17,15 +17,17 @@ levels:
       Great!
 - board: >-
     a . . A
-    . . . .
-    . . . .
-    b . . B
+    B . . b
+    c . . C
+    D . . d
   text: >-
-      We hired too many teams for the job.  
+      From now on, you'll need to fully excavate each site.  
 
 
-      Now you have to make sure each excavator finds its way to the correct
-      site.
+      Thankfully we hired a lot of teams for the job.
+
+
+      Make sure each excavator finds its way to the correct site.
 - board: |
     . . . . .
     . . B . .
@@ -33,7 +35,7 @@ levels:
     . . . . .
     b . . . .
   text: >-
-      The excavators cannot cross each other's paths.
+      Careful, the excavators cannot cross each other's paths!
 
 
       You can undo or reset if you get stuck.

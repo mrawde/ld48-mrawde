@@ -64,6 +64,10 @@ def create_level_pack_from_data(data):
         level.text = level_data.text or ""
         level.success_text = level_data.success_text
         level.num = i+1
+        level.id = replace("PACK_N", {
+            PACK: pack.id,
+            N: i,
+        })
         push(pack.levels, level)
     return pack
 
