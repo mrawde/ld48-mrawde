@@ -1,7 +1,9 @@
 def init_game_progress():
-    if IDE_USER == "Edx":
+    /*
+    if IDE_USER == "Ed":
         debug_print("reseting progress!")
         save_local("progress", {})
+        */
     let progress = load_local("progress")
     if not progress:
         progress = {

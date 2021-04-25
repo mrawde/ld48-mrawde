@@ -11,7 +11,8 @@
         "TeamColors_sprite": "TeamColors.sprite.json",
         "Truck_sprite": "Truck.sprite.json",
         "deja_8_font": "quad://fonts/deja-8.font.json",
-        "weaver_10_font": "quad://fonts/weaver-10.font.json"
+        "weaver_10_font": "quad://fonts/weaver-10.font.json",
+        "deja_6_font": "quad://fonts/deja-6.font.json"
     },
     "competitive": false,
     "constants": {
@@ -629,10 +630,28 @@
             "description": "Z for the trucks",
             "type": "number",
             "value": "2"
+        },
+        "CREDIT_OFFSET": {
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "-5"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "-2"
+                }
+            },
+            "description": "Where to draw credits",
+            "nudge": {
+                "x": "+1",
+                "y": "-1"
+            }
         }
     },
     "cooperative": false,
-    "copyright": "\u00a92021 Your Name Here",
+    "copyright": "©2021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],

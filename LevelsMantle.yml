@@ -2,6 +2,8 @@ id: "mantle"
 name: "The Mantle"
 levels:
 - board: ab..........c...A....CB..
+  text: >-
+      The ground is harder here.
 - board: .ab.c..C....B...........A
 - board: ....c.a....b.....CB.A....
 - board: ........c...b.a..CBd.AD..

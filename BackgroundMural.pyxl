@@ -15,13 +15,22 @@ def draw_mural():
         z: Z_BG,
     })
     
+    const credit_font = deja_6_font
+    draw_text({
+        pos: SCREEN_SIZE + CREDIT_OFFSET,
+        x_align: "right",
+        y_align: "bottom",
+        font: credit_font,
+        text: "@MRAWDE\nfor LD48",
+        color: #fff,
+    })
+    
 def get_target_y_for_pack(pack_idx):
-    // can't use an array because the constant doesn't update
+    // don't make this a variable, otherwise, it'll copy the constant values.
     return [
-        BG_Y_START,
         BG_Y_SURFACE,
         BG_Y_CRUST,
         BG_Y_MANTLE,
         BG_Y_CORE,
         BG_Y_FINAL,
-    ][pack_idx+1]
+    ][pack_idx]
