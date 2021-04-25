@@ -69,6 +69,28 @@ def update_curr_path(level_state, player_state):
     
 def handle_player_input(gamepad):
     let actions = {}
+    
+    let button_offset = xy(BUTTONS_OFFSET)
+    const button_spacing = 1.1 * BUTTON_SIZE.x
+    const clicked_next_truck = button_state({
+        corner: button_offset,
+        size: BUTTON_SIZE,
+        text: replace("Next (d)", gamepad.prompt),
+    }).clicked
+    button_offset.x += button_spacing
+    const clicked_undo = button_state({
+        corner: button_offset,
+        size: BUTTON_SIZE,
+        text: replace("Undo (e)", gamepad.prompt),
+    }).clicked
+    button_offset.x += button_spacing
+    const clicked_reset = button_state({
+        corner: button_offset,
+        size: BUTTON_SIZE,
+        text: replace("Reset (q)", gamepad.prompt),
+    }).clicked
+    button_offset.x += button_spacing    
+    
     if input_block.flag:
         return actions
     
@@ -87,14 +109,14 @@ def handle_player_input(gamepad):
     if gamepad.xx or gamepad.yy:
         actions.move = x_or_y(xy(gamepad.xx, gamepad.yy))
         
-    if gamepad.dd:
+    if clicked_next_truck or gamepad.dd:
         actions.next_player = true
-        
-    if gamepad.qq:
-        actions.reset_level = true
-        
-    if gamepad.ee:
+         
+    if clicked_undo or gamepad.ee:
         actions.undo = true
+       
+    if clicked_reset or gamepad.qq:
+        actions.reset_level = true
             
     return actions
     
@@ -255,6 +277,7 @@ def sequence_move(level_elem, truck_elem, dir):
 enter(level_state_)
 ────────────────────────────────────────────────────────────────────────
 set_background(GROUND_COLOR)
+device_control("set_mouse_cursor", "none")
 
 player_state = {
     curr_truck: 0,
@@ -284,11 +307,7 @@ frame
 ────────────────────────────────────────────────────────────────────────
 
 update_cursor_hover()
-draw_rect({
-    pos: cursor_hover,
-    size: xy(5, 5),
-    color: #333,
-})
+draw_mouse_cursor()
 
 update_curr_path(level_state, player_state)
 

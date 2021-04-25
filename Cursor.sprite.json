@@ -1,0 +1,11 @@
+{
+    "aseprite_json": "aseprite/Cursor.aseprite.json",
+    "license": "None",
+    "locked_size": true,
+    "names": {},
+    "sprite_size": {
+        "x": 16,
+        "y": 16
+    },
+    "url": "Cursor.png"
+}
