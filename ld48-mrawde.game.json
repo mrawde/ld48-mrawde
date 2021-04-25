@@ -25,11 +25,11 @@
                 },
                 "g": {
                     "type": "number",
-                    "value": "100%"
+                    "value": "71%"
                 },
                 "r": {
                     "type": "number",
-                    "value": "100%"
+                    "value": "65%"
                 }
             }
         },
@@ -332,7 +332,7 @@
                 },
                 "y": {
                     "type": "number",
-                    "value": "100"
+                    "value": "120"
                 }
             }
         },
@@ -471,7 +471,7 @@
         }
     },
     "cooperative": false,
-    "copyright": "\u00a92021 Your Name Here",
+    "copyright": "©2021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],

@@ -18,16 +18,27 @@ def draw_game(level_elem, player_state):
     
     preserving_transform:
         compose_transform({
-            pos: BOARD_OFFSET,
+            pos: compute_offset_for_board(level_elem.state.size),
         })
         draw_path(player_state.path, SECONDARY_COLORS[player_state.curr_truck])
+ 
+def compute_offset_for_board(board_size):
+    const offset_for_size = ½ (6 - board_size.x) * TILE_SIZE
+    return BOARD_OFFSET + offset_for_size
     
 def draw_level(level_elem, player_state) preserving_transform:
+    const level_state = level_elem.state
     compose_transform({
-        pos: BOARD_OFFSET,
+        pos: compute_offset_for_board(level_state.size),
     })
     
-    const level_state = level_elem.state
+    const padding = ⅛ TILE_SIZE
+    draw_corner_rect({
+        corner: -padding,
+        size: TILE_SIZE * level_state.size + 2*padding,
+        color: BACKGROUND_COLOR,
+    })
+        
     let tile_rand = make_random(level_state.num)
 
     for y < level_state.size.y:
