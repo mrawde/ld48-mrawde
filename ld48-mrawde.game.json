@@ -1,6 +1,7 @@
 {
     "achievements": false,
     "assets": {
+        "BackgroundMusic_sound": "BackgroundMusic.sound.json",
         "Cursor_sprite": "Cursor.sprite.json",
         "GroundTiles_sprite": "GroundTiles.sprite.json",
         "TeamColors_sprite": "TeamColors.sprite.json",
@@ -43,6 +44,130 @@
                 "y": {
                     "type": "number",
                     "value": "5"
+                }
+            }
+        },
+        "BUTTONS_OFFSET": {
+            "description": "Offset for buttons",
+            "nudge": {
+                "x": "+10",
+                "y": "-10"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "100"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "200"
+                }
+            }
+        },
+        "BUTTON_FILL_COLOR": {
+            "description": "Button fill color",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "22%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "29%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "68%"
+                }
+            }
+        },
+        "BUTTON_FILL_DISABLED_COLOR": {
+            "description": "Color for disabled",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            }
+        },
+        "BUTTON_OUTLINE_COLOR": {
+            "description": "Color for button outlines",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "31%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "23%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "64%"
+                }
+            }
+        },
+        "BUTTON_SIZE": {
+            "description": "Size for buttons",
+            "nudge": {
+                "x": "+5",
+                "y": "-5"
+            },
+            "type": "xy",
+            "value": {
+                "x": {
+                    "type": "number",
+                    "value": "60"
+                },
+                "y": {
+                    "type": "number",
+                    "value": "15"
+                }
+            }
+        },
+        "BUTTON_TEXT_COLOR": {
+            "description": "Button text color",
+            "type": "rgba",
+            "value": {
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "100%"
+                },
+                "r": {
+                    "type": "number",
+                    "value": "100%"
                 }
             }
         },
@@ -186,129 +311,16 @@
             "type": "number",
             "value": "2"
         },
-        "BUTTON_OUTLINE_COLOR": {
-            "type": "rgba",
-            "value": {
-                "r": {
-                    "type": "number",
-                    "value": "64%"
-                },
-                "g": {
-                    "type": "number",
-                    "value": "23%"
-                },
-                "b": {
-                    "type": "number",
-                    "value": "31%"
-                },
-                "a": {
-                    "type": "number",
-                    "value": "100%"
-                }
+        "BACKGROUND_LOOP_FRAMES": {
+            "type": "number",
+            "value": "480",
+            "min": 0,
+            "max": {
+                "type": "number",
+                "value": "+infinity"
             },
-            "description": "Color for button outlines"
-        },
-        "BUTTON_FILL_COLOR": {
-            "type": "rgba",
-            "value": {
-                "r": {
-                    "type": "number",
-                    "value": "68%"
-                },
-                "g": {
-                    "type": "number",
-                    "value": "29%"
-                },
-                "b": {
-                    "type": "number",
-                    "value": "22%"
-                },
-                "a": {
-                    "type": "number",
-                    "value": "100%"
-                }
-            },
-            "description": "Button fill color"
-        },
-        "BUTTON_FILL_DISABLED_COLOR": {
-            "type": "rgba",
-            "value": {
-                "r": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "g": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "b": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "a": {
-                    "type": "number",
-                    "value": "100%"
-                }
-            },
-            "description": "Color for disabled"
-        },
-        "BUTTON_TEXT_COLOR": {
-            "type": "rgba",
-            "value": {
-                "r": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "g": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "b": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "a": {
-                    "type": "number",
-                    "value": "100%"
-                }
-            },
-            "description": "Button text color"
-        },
-        "BUTTON_SIZE": {
-            "type": "xy",
-            "value": {
-                "x": {
-                    "type": "number",
-                    "value": "60"
-                },
-                "y": {
-                    "type": "number",
-                    "value": "15"
-                }
-            },
-            "description": "Size for buttons",
-            "nudge": {
-                "x": "+5",
-                "y": "-5"
-            }
-        },
-        "BUTTONS_OFFSET": {
-            "type": "xy",
-            "value": {
-                "x": {
-                    "type": "number",
-                    "value": "100"
-                },
-                "y": {
-                    "type": "number",
-                    "value": "200"
-                }
-            },
-            "description": "Offset for buttons",
-            "nudge": {
-                "x": "+10",
-                "y": "-10"
-            }
+            "format": "",
+            "quantum": 0
         }
     },
     "cooperative": false,
@@ -335,7 +347,8 @@
         "LevelPacks.pyxl",
         "GameProgress.pyxl",
         "Draw.pyxl",
-        "PuzzleLogic.pyxl"
+        "PuzzleLogic.pyxl",
+        "Music.pyxl"
     ],
     "start_mode": "TitleScreen",
     "title": "ld48-mrawde",

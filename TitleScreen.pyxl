@@ -7,7 +7,7 @@ enter
 ────────────────────────────────────────────────────────────────────────
 // This event runs when the mode is entered via set_mode() or push_mode().
 set_background(TitleScreen_sprite)
-
+loop_music(BackgroundMusic_sound, BACKGROUND_LOOP_FRAMES)
 frame
 ────────────────────────────────────────────────────────────────────────
 if any_button_press():
