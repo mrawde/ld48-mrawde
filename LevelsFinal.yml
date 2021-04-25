@@ -6,4 +6,7 @@ levels:
     . a .
     . . .
   text: >-
-      Here is a floating ball.
+      We got pushed to the brink, and all we got were some lumens.
+
+  success_text: >-
+      When life gives you lumens...

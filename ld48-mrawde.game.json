@@ -304,7 +304,7 @@
             },
             "quantum": 0,
             "type": "number",
-            "value": "30"
+            "value": "90"
         },
         "FRAMES_LEVEL_SLIDE": {
             "description": "How long it takes for a level to slide in/out.",

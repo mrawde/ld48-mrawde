@@ -6,7 +6,11 @@ levels:
       The ground is harder here.
 - board: .ab.c..C....B...........A
 - board: ....c.a....b.....CB.A....
+  text: >-
+      I think this would be easier with just one team.
 - board: ........c...b.a..CBd.AD..
+  text: >-
+      It sure is crowded.
 - board: .ab.B.......A....c......C
 - board: ......b.....c...aB..AC...
 - board: ...bc..aC...B.....A......
@@ -14,4 +18,4 @@ levels:
 - board: a.cb...A....C.......B....
 - board: ......ba....B...c...A..C.
   success_text: >-
-      Down to the core we go.
+      Deeper, into the core we go.

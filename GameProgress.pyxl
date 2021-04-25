@@ -1,10 +1,10 @@
-const unlock_all = IDE_USER == "Ed"
+const unlock_all = IDE_USER == "Edx"
 
 def init_game_progress():
     
-    /*if IDE_USER == "Ed":
+    if 0 and IDE_USER == "Ed":
         debug_print("reseting progress!")
-        save_local("progress", {})*/
+        save_local("progress", {})
     let progress = load_local("progress")
     if not progress:
         progress = {
@@ -36,7 +36,7 @@ def advance_game_progress(game_progress):
         game_progress.curr_level_idx = 0
         const next_pack = PACKS[game_progress.curr_pack_idx]
         if next_pack:
-            game_progress.farthest[next_pack.id] = 0
+            game_progress.farthest[next_pack.id] = max(game_progress.farthest[next_pack.id], 0)
         
     if not unlock_all:
         save_local("progress", game_progress)

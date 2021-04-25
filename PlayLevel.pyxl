@@ -430,6 +430,7 @@ else:
 push(player_state.undo_stack, copy_level_state(level_state))
 level_element = init_level_element(level_state)
 enter_level(player_state)
+target_y = get_target_y_for_pack(game_progress.curr_pack_idx)
 
 frame
 ────────────────────────────────────────────────────────────────────────

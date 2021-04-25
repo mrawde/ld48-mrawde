@@ -14,7 +14,4 @@ levels:
 - board: .bc..C........B..d...D.e......a..AE.
 - board: ........a.d..A..c..bDe......B..CE...
   success_text: >-
-      Congratulations!  
-
-
-      Our job here is done.
+      Our job here is done!
