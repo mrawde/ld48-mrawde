@@ -83,15 +83,15 @@
                 },
                 "b": {
                     "type": "number",
-                    "value": "54%"
+                    "value": "28%"
                 },
                 "g": {
                     "type": "number",
-                    "value": "17%"
+                    "value": "29%"
                 },
                 "r": {
                     "type": "number",
-                    "value": "75%"
+                    "value": "95%"
                 }
             }
         },
@@ -105,7 +105,7 @@
             "value": {
                 "x": {
                     "type": "number",
-                    "value": "270"
+                    "value": "310"
                 },
                 "y": {
                     "type": "number",

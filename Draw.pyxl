@@ -8,7 +8,7 @@ def init_colors_from_sprite(row):
 const COLORS = init_colors_from_sprite(1)
 const SECONDARY_COLORS = init_colors_from_sprite(0)
 const HUD_LEVEL_FONT = font
-const GROUND_COLOR = get_sprite_pixel_color(GroundTiles_sprite[0][0], xy(0, 0))
+const GROUND_COLOR = get_sprite_pixel_color(GroundTiles_sprite[0][0], xy(2, 1))
 
 def draw_game(level_elem, player_state):
     draw_level(level_elem, player_state)

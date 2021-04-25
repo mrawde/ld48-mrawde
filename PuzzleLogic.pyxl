@@ -15,9 +15,12 @@ def can_move(level_state, player_state, dest_coord):
     return true
 
 def is_truck_at_goal(level_state, truck_idx):
-    const curr_goal = level_state.goals[truck_idx]
+    const curr_goal = get_goal_for_truck(level_state, truck_idx)
     const curr_truck = level_state.trucks[truck_idx]
     return eq(curr_truck.coord, curr_goal.coord)
+
+def get_goal_for_truck(level_state, truck_idx):
+    return level_state.goals[truck_idx]
 
 def is_coord_valid_for_move(level_state, coord):
     if not is_on_board(level_state.size, coord):

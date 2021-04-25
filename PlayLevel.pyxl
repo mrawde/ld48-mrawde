@@ -24,7 +24,7 @@ def init_level_element(level_state):
         let truck_elem = {
             which: i,
             offset: xy(0, 0),
-            angle: 0°,
+            angle: 90° * random_integer(0, 3),
             state: truck,
             anim: "idle",
         }
@@ -48,20 +48,18 @@ def update_curr_path(level_state, player_state):
     if is_long_press():
         // look at the current
         const coord = screen_to_board_coord(cursor_hover)
-        
-        if (is_truck_at_goal(level_state, player_state.curr_truck) 
-            or not is_coord_valid_for_move(level_state, coord)):
-            return
-        
-        todo("don't let path move through goal")
         const last_coord = last_value(path)
-        if manhattan(last_coord - coord) == 1:
-            let found = find_eq(path, coord)
-            if found ≠ ∅:
-                if found == size(path)-2:
-                    pop(path)
-            else:
-                push(path, coord)
+        const found = find_eq(path, coord)
+        const undoing_path = found ≠ ∅ and found == size(path)-2
+        if undoing_path:
+            pop(path)
+        else:
+            if not is_coord_valid_for_move(level_state, coord):  
+                if manhattan(last_coord - coord) == 1:
+                    if found == ∅:
+                        const curr_goal = get_goal_for_truck(level_state, player_state.curr_truck)
+                        if not eq(last_coord, curr_goal.coord):
+                            push(path, coord)
 
     else:
         player_state.last_path = path
@@ -318,7 +316,7 @@ if actions.undo:
         and size(player_state.undo_stack) > 1):
         pop(player_state.undo_stack)
         
-    if size(player_state.undo_stack) > 1:
+    if 0 and size(player_state.undo_stack) > 1:
         level_state = pop(player_state.undo_stack)
     else:
         level_state = copy_level_state(last_value(player_state.undo_stack))
