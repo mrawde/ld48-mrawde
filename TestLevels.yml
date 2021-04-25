@@ -23,3 +23,5 @@ levels:
       . . . . . .
       . . . . . .
       . . . . . .
+  success_text: >-
+      You did it!

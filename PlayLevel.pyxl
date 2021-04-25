@@ -386,7 +386,10 @@ def show_level_success_message_and_advance_cb():
     
 def advance_game_cb():
     advance_game_progress(game_progress)
-    set_mode(PlayLevel, ∅)
+    if game_progress.curr_pack_idx ≥ size(PACKS):
+        set_mode(LevelSelect)
+    else:
+        set_mode(PlayLevel, ∅)
     
 enter(level_state_)
 ────────────────────────────────────────────────────────────────────────
