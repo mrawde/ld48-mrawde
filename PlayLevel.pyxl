@@ -213,6 +213,7 @@ def move_path(input_block, level_elem, truck_elem, path):
         last = curr
     
     def move_path_done(data):
+        truck_elem.angle = 0° 
         data.input_block.flag -= 1
         
     sequence(...moves,
@@ -284,7 +285,6 @@ def sequence_move(level_elem, truck_elem, dir):
         if is_truck_at_goal(level_state, truck_idx):
             play_sound(Goal_sound)
 
-        truck_elem.angle = 0° 
         truck_elem.anim = "idle"
         
     const move_data = {
@@ -396,6 +396,7 @@ enter(level_state_)
 set_background(TitleScreen_sprite)
 device_control("set_mouse_cursor", "none")
 
+debug_print(game_progress)
 player_state = {
     curr_truck: 0,
     undo_stack: [],

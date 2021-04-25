@@ -1,0 +1,41 @@
+id: "crust"
+name: "Crust"
+levels: 
+- board: |
+    . . .
+    a . A
+    . . .
+  text: >-
+      This is an excavator.  
+
+
+      It digs up the ground behind it.  
+
+
+      You will need to drag it to the collection site.
+  success_text: >-
+      Great!
+- board: >-
+    a . . A
+    . . . .
+    . . . .
+    b . . B
+  text: >-
+      We hired too many teams for the job.  
+
+
+      Now you have to make sure each excavator finds its way to the correct
+      site.
+- board: |
+    . . . . .
+    . . B . .
+    a . . . A
+    . . . . .
+    b . . . .
+  text: >-
+      The excavators cannot cross each other's paths.
+
+
+      You can undo or reset if you get stuck.
+  success_text: >-
+      Good luck!

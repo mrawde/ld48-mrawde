@@ -1,5 +1,5 @@
-id: "tutorial"
-name: "Tutorial"
+id: "surface"
+name: "Surface"
 levels: 
 - board: |
     . . .

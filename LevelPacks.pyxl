@@ -67,5 +67,18 @@ def create_level_pack_from_data(data):
         push(pack.levels, level)
     return pack
 
-const TUTORIAL_LEVEL_PACK = create_level_pack_from_data(TUTORIALLEVELS_YAML)
-const CAMPAIGN_LEVEL_PACK = create_level_pack_from_data(TESTLEVELS_YAML)
+const SURFACE_LEVEL_PACK = create_level_pack_from_data(LEVELS_SURFACE_YAML)
+const CRUST_LEVEL_PACK = create_level_pack_from_data(LEVELS_CRUST_YAML)
+const MANTLE_LEVEL_PACK = create_level_pack_from_data(LEVELS_MANTLE_YAML)
+const CORE_LEVEL_PACK = create_level_pack_from_data(LEVELS_CORE_YAML)
+
+const PACKS = [
+    // intro puzzles to teach the game
+    SURFACE_LEVEL_PACK,
+    // harder 5x5 puzzles
+    CRUST_LEVEL_PACK,
+    // more 6x6 puzzles
+    MANTLE_LEVEL_PACK,
+    // more 6x6 puzzles
+    CORE_LEVEL_PACK,
+]

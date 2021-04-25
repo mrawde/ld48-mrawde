@@ -71,10 +71,15 @@ def handle_player_input(gamepad, player_state, game_progress):
     if gamepad.yy:
         player_state.pack_idx += gamepad.yy
 
-    player_state.pack_idx = clamp(player_state.pack_idx, 0, size(PACKS)-1)
-    const pack = PACKS[player_state.pack_idx]
-    player_state.level_idx = clamp(player_state.level_idx, 0, game_progress.farthest[pack.id])
     
+    player_state.pack_idx = clamp(player_state.pack_idx, 0, size(PACKS)-1)
+    let pack = PACKS[player_state.pack_idx]
+    while player_state.pack_idx > 0 and game_progress.farthest[pack.id] < 0:
+        player_state.pack_idx--
+        player_state.level_idx = clamp(player_state.level_idx, 0, game_progress.farthest[pack.id])
+        
+    player_state.level_idx = clamp(player_state.level_idx, 0, game_progress.farthest[pack.id])
+
     if gamepad.aa or gamepad.bb or gamepad.cc or gamepad.dd:
         actions.clicked = true
             

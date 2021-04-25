@@ -310,7 +310,7 @@
                 },
                 "y": {
                     "type": "number",
-                    "value": "120"
+                    "value": "80"
                 }
             }
         },
@@ -332,6 +332,26 @@
                 }
             }
         },
+        "LEVELS_TEST_YAML": {
+            "type": "raw",
+            "url": "LevelsTest.yml"
+        },
+        "LEVELS_SURFACE_YAML": {
+            "type": "raw",
+            "url": "LevelsSurface.yml"
+        },
+        "LEVELS_CRUST_YAML": {
+            "type": "raw",
+            "url": "LevelsCrust.yml"
+        },
+        "LEVELS_MANTLE_YAML": {
+            "type": "raw",
+            "url": "LevelsMantle.yml"
+        },
+        "LEVELS_CORE_YAML": {
+            "type": "raw",
+            "url": "LevelsCore.yml"
+        },
         "SOUND_MOVE_VOLUME": {
             "description": "How loud the move sound effect is",
             "format": "",
@@ -343,10 +363,6 @@
             "quantum": 0,
             "type": "number",
             "value": "0.301"
-        },
-        "TESTLEVELS_YAML": {
-            "type": "raw",
-            "url": "TestLevels.yml"
         },
         "TEXT_BOX_OFFSET": {
             "description": "where the text goes",
@@ -422,10 +438,6 @@
             "quantum": 0,
             "type": "number",
             "value": "6.085"
-        },
-        "TUTORIALLEVELS_YAML": {
-            "type": "raw",
-            "url": "TutorialLevels.yml"
         },
         "Z_CURSOR": {
             "description": "Z for the mouse cursor",

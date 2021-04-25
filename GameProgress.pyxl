@@ -1,10 +1,5 @@
-const PACKS = [
-    TUTORIAL_LEVEL_PACK,
-    CAMPAIGN_LEVEL_PACK,
-]
-
 def init_game_progress():
-    if IDE_USER == "Ed":
+    if IDE_USER == "Edx":
         debug_print("reseting progress!")
         save_local("progress", {})
     let progress = load_local("progress")
@@ -19,9 +14,10 @@ def init_game_progress():
     if not progress.farthest:
         progress.farthest = {}
         
-    for pack in PACKS:
-        if not progress.farthest[pack.id]:
-            progress.farthest[pack.id] = 0
+    for i < size(PACKS):
+        const pack = PACKS[i]
+        if progress.farthest[pack.id] == ∅:
+            progress.farthest[pack.id] = if i == 0 then 0 else -1
     return progress
         
     
@@ -33,7 +29,10 @@ def advance_game_progress(game_progress):
     if game_progress.curr_level_idx ≥ num_levels_in_pack:
         game_progress.curr_pack_idx += 1
         game_progress.curr_level_idx = 0
+        const next_pack = PACKS[game_progress.curr_pack_idx]
+        game_progress.farthest[next_pack.id] = 0
         
+    debug_print(game_progress)
     save_local("progress", game_progress)
     
 let game_progress = init_game_progress()
