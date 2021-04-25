@@ -33,6 +33,9 @@ levels:
     . . . . .
     b . . . .
   text: >-
+      The excavators cannot cross each other's paths.
+
+
       You can undo or reset if you get stuck.
   success_text: >-
       Good luck!

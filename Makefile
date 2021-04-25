@@ -1,8 +1,7 @@
 GIT = git
 GITSTATUS := $(shell git diff-index --quiet HEAD . 1>&2 2> /dev/null; echo $$?)
-DEPLOY_BRANCH = DEPLOY_7DRL_PREP
-DEPLOY_BRANCH = master
-DEV_BRANCH = dev
+DEPLOY_BRANCH = deploy
+DEV_BRANCH = main
 QUADPLAY_ROOT = /Users/Ed/projects/quadplay-dev/
 
 GAME_NAME = ld48-mrawde

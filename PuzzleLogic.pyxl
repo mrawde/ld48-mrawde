@@ -9,7 +9,7 @@ def can_move(level_state, player_state, dest_coord):
     if is_truck_at_goal(level_state, player_state.curr_truck):
         return false
         
-    if not is_coord_valid_for_move(level_state, dest_coord):
+    if not is_coord_valid_for_move(level_state, player_state, dest_coord):
         return false
 
     return true
@@ -22,7 +22,7 @@ def is_truck_at_goal(level_state, truck_idx):
 def get_goal_for_truck(level_state, truck_idx):
     return level_state.goals[truck_idx]
 
-def is_coord_valid_for_move(level_state, coord):
+def is_coord_valid_for_move(level_state, player_state, coord):
     if not is_on_board(level_state.size, coord):
         return false
         
@@ -33,6 +33,12 @@ def is_coord_valid_for_move(level_state, coord):
     // collide with other trucks
     for truck in level_state.trucks:
         if eq(truck.coord, coord):
+            return false
+            
+    // collide with goals that are not ours
+    for i < size(level_state.goals):
+        const goal = level_state.goals[i]
+        if i ≠ player_state.curr_truck and eq(goal.coord, coord):
             return false
             
     return true       

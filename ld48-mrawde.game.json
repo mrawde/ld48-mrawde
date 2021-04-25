@@ -483,6 +483,26 @@
                 }
             },
             "description": "color for finished levels"
+        },
+        "Z_LEVEL_END_TEXT": {
+            "type": "number",
+            "value": "2.5",
+            "description": "Z for end of message text."
+        },
+        "FRAMES_DIALOG": {
+            "type": "number",
+            "value": "30",
+            "description": "How many frames to show text per 10 chars.",
+            "min": {
+                "type": "number",
+                "value": "1"
+            },
+            "max": {
+                "type": "number",
+                "value": "100"
+            },
+            "format": "",
+            "quantum": 0
         }
     },
     "cooperative": false,
