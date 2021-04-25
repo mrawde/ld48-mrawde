@@ -275,28 +275,6 @@
                 }
             }
         },
-        "LEVEL_DONE_FILL_COLOR": {
-            "description": "Color if a level is done",
-            "type": "rgba",
-            "value": {
-                "a": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "b": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "g": {
-                    "type": "number",
-                    "value": "100%"
-                },
-                "r": {
-                    "type": "number",
-                    "value": "100%"
-                }
-            }
-        },
         "LEVEL_SELECT_COLOR": {
             "description": "Main color on level select page",
             "type": "rgba",
@@ -483,6 +461,28 @@
             },
             "format": "",
             "quantum": 0
+        },
+        "LEVEL_SELECT_DONE_COLOR": {
+            "type": "rgba",
+            "value": {
+                "r": {
+                    "type": "number",
+                    "value": "33%"
+                },
+                "g": {
+                    "type": "number",
+                    "value": "85%"
+                },
+                "b": {
+                    "type": "number",
+                    "value": "0%"
+                },
+                "a": {
+                    "type": "number",
+                    "value": "100%"
+                }
+            },
+            "description": "color for finished levels"
         }
     },
     "cooperative": false,

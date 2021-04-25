@@ -27,14 +27,14 @@ def draw_level_selection(game_progress):
         })
         
         y_offset += 4
-        const farthest = game_progress.farthest[pack.name]
+        const farthest = game_progress.farthest[pack.id]
         for i < size(pack.levels):
             const level = pack.levels[i]
             const corner = xy(i, 0) * level_offset + xy(x_offset, y_offset)
             const level_text = replace("N", {N: level.num, })
             const finished = i < farthest
             
-            const text_color = if finished then #0f0 else #fff
+            const text_color = if finished then LEVEL_SELECT_DONE_COLOR else level_text_color
             let bs = button_state({
                 corner: corner,
                 size: LEVEL_SELECT_SIZE,
@@ -59,6 +59,7 @@ enter
 // This event runs when the mode is entered via set_mode() or push_mode().
 device_control("set_mouse_cursor", "none")
 set_background(TitleScreen_sprite)
+debug_print(game_progress)
 
 frame
 ────────────────────────────────────────────────────────────────────────

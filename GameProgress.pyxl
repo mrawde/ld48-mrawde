@@ -4,7 +4,7 @@ const PACKS = [
 ]
 
 def init_game_progress():
-    if IDE_USER == "Ed":
+    if IDE_USER == "Edx":
         debug_print("reseting progress!")
         save_local("progress", {})
     let progress = load_local("progress")

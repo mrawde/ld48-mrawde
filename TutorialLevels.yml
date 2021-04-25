@@ -1,7 +1,5 @@
 id: "tutorial"
 name: "Tutorial"
-end_message: >-
-    Good luck!
 levels: 
 - board: |
     . . .
@@ -15,6 +13,8 @@ levels:
 
 
       You will need to drag it to the collection site.
+  success_text: >-
+      Great!
 - board: >-
     a . . A
     . . . .
@@ -34,3 +34,5 @@ levels:
     b . . . .
   text: >-
       You can undo or reset if you get stuck.
+  success_text: >-
+      Good luck!

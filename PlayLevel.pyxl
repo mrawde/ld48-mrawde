@@ -23,7 +23,7 @@ def init_level_element(level_state):
         let truck_elem = {
             which: i,
             offset: xy(0, 0),
-            angle: 90° * random_integer(0, 3),
+            angle: 0°, 
             state: truck,
             anim: "idle",
         }
@@ -284,6 +284,7 @@ def sequence_move(level_elem, truck_elem, dir):
         if is_truck_at_goal(level_state, truck_idx):
             play_sound(Goal_sound)
 
+        truck_elem.angle = 0° 
         truck_elem.anim = "idle"
         
     const move_data = {
@@ -330,6 +331,7 @@ def enter_level(player_state):
     })
     
 def leave_level(cb):
+    player_state.leaving = true
     player_state.input_block++
     const slide_target = xy(SCREEN_SIZE.x, 0)
     player_state.slide_pos = xy(0, 0)
@@ -351,10 +353,41 @@ def leave_level(cb):
         end_callback: slide_leave,
         frames: FRAMES_LEVEL_SLIDE,
         data: slide_data,
-    })    
-def sequence_exit_level():
-    
+    }) 
+ 
+def check_level(level_state, player_state):
+    if is_level_done(level_state) and not player_state.leaving:
+        leave_level(show_level_success_message_and_advance_cb)
 
+// show a message
+def show_level_success_message_and_advance_cb():
+    if level_state.success_text:
+        def show_success_text_frame(frames_left, total_frames, data):
+            draw_text({
+                font: TEXT_FONT,
+                pos: ½ SCREEN_SIZE,
+                color: HUD_TEXT_COLOR,
+                text: level_state.success_text,
+                x_align: "center",
+                z: 10,
+            })
+            if any_button_press():
+                return sequence.NEXT
+        def show_success_text_leave(data):
+            delay(advance_game_cb, 0)
+                
+        sequence({
+            callback: show_success_text_frame,
+            frames: ∞,
+            end_callback: show_success_text_leave,
+        })
+    else:
+        advance_game_cb()
+    
+def advance_game_cb():
+    advance_game_progress(game_progress)
+    set_mode(PlayLevel, ∅)
+    
 enter(level_state_)
 ────────────────────────────────────────────────────────────────────────
 set_background(TitleScreen_sprite)
@@ -367,6 +400,8 @@ player_state = {
     last_path: [],
     // used to slide everything away
     slide_pos: xy(0, 0),
+    // track if we're in the process of leaving
+    leaving: false,
 }
 
 input_block = {
@@ -378,7 +413,7 @@ if level_state_:
 else:
     let level = ∅
     if game_progress.curr_pack_idx ≥ size(PACKS):
-        set_mode(LevelSelect)
+        leave_level(level_sel_cb)
     else:
         const pack = PACKS[game_progress.curr_pack_idx]
         level = pack.levels[game_progress.curr_level_idx] 
@@ -407,7 +442,7 @@ if actions.undo:
     level_element = init_level_element(level_state)
 
 if not input_block.flag:
-    check_level(level_state)      
+    check_level(level_state, player_state)      
     
 update_state(level_element, player_state, actions)
 preserving_transform:

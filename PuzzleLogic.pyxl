@@ -44,8 +44,3 @@ def is_level_done(level_state):
         if not eq(truck.coord, goal.coord):
             return false
     return true
-            
-def check_level(level_state):
-    if is_level_done(level_state):
-        advance_game_progress(game_progress)
-        set_mode(PlayLevel, ∅)
