@@ -1,5 +1,5 @@
 {
-    "achievements": false,
+    "achievements": true,
     "assets": {
         "BackgroundMural_sprite": "BackgroundMural.sprite.json",
         "BackgroundMusic_sound": "BackgroundMusic.sound.json",
@@ -683,12 +683,12 @@
         }
     },
     "cooperative": false,
-    "copyright": "©2021 Your Name Here",
-    "description": "Description of your game in about 100 characters.",
-    "developer": "Your Name Here",
+    "copyright": "©2021 Edward Luong",
+    "description": "Dig deeper into the mysteries by solving Numberlink puzzles.",
+    "developer": "Edward Luong",
     "docs": [],
-    "highscores": false,
-    "license": "CC0/Public Domain (Replace with your own license)",
+    "highscores": true,
+    "license": "Released into the public domain; CC0 licensed https://creativecommons.org/share-your-work/public-domain/cc0/",
     "max_players": 1,
     "min_players": 1,
     "modes": [
@@ -708,6 +708,6 @@
         "BackgroundMural.pyxl"
     ],
     "start_mode": "LevelSelect",
-    "title": "ld48-mrawde",
+    "title": "LumenBrink",
     "version": 0
 }
