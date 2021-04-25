@@ -129,7 +129,7 @@
             },
             "quantum": 0,
             "type": "number",
-            "value": "19.200000000000045"
+            "value": "50"
         },
         "BOARD_OFFSET": {
             "description": "offset from the screen for tile[0,0]",
@@ -678,7 +678,7 @@
         }
     },
     "cooperative": false,
-    "copyright": "\u00a92021 Your Name Here",
+    "copyright": "©2021 Your Name Here",
     "description": "Description of your game in about 100 characters.",
     "developer": "Your Name Here",
     "docs": [],
