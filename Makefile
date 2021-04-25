@@ -17,7 +17,7 @@ DEPLOY_REPO_NAME = ld48-mrawde
 DEPLOY_REMOTE = git@github.com:$(DEPLOY_USER)/$(DEPLOY_REPO_NAME).git
 
 sprite_pngs := GroundTiles.png TeamColors.png TitleScreen.png Truck.png Cursor.png
-sound_wavs := BackgroundMusic.mp3
+sound_wavs := BackgroundMusic.mp3 Click.mp3 Goal.mp3 Move.mp3
 
 all: sprites sounds
 	

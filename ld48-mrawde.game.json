@@ -7,7 +7,10 @@
         "TeamColors_sprite": "TeamColors.sprite.json",
         "TitleScreen_sprite": "TitleScreen.sprite.json",
         "Truck_sprite": "Truck.sprite.json",
-        "font": "quad://fonts/deja-8.font.json"
+        "font": "quad://fonts/deja-8.font.json",
+        "Goal_sound": "Goal.sound.json",
+        "Move_sound": "Move.sound.json",
+        "Click_sound": "Click.sound.json"
     },
     "competitive": false,
     "constants": {
@@ -313,7 +316,7 @@
         },
         "BACKGROUND_LOOP_FRAMES": {
             "type": "number",
-            "value": "480",
+            "value": "484",
             "min": 0,
             "max": {
                 "type": "number",

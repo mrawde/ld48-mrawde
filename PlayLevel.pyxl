@@ -1,6 +1,6 @@
 PlayLevel
 ════════════════════════════════════════════════════════════════════════
-
+let bg_music
 let level_state
 let level_element
 let player_state
@@ -52,13 +52,15 @@ def update_curr_path(level_state, player_state):
         const found = find_eq(path, coord)
         const undoing_path = found ≠ ∅ and found == size(path)-2
         if undoing_path:
+            play_sound(Click_sound)
             pop(path)
         else:
-            if not is_coord_valid_for_move(level_state, coord):  
+            if is_coord_valid_for_move(level_state, coord):  
                 if manhattan(last_coord - coord) == 1:
                     if found == ∅:
                         const curr_goal = get_goal_for_truck(level_state, player_state.curr_truck)
                         if not eq(last_coord, curr_goal.coord):
+                            play_sound(Click_sound)
                             push(path, coord)
 
     else:
@@ -239,6 +241,7 @@ def sequence_move(level_elem, truck_elem, dir):
         truck_elem.offset = start_offset
         truck_elem.angle = target_angle
         truck_elem.anim = "running"
+        play_sound(Move_sound)
     
     def move_frame(frames_left, total_frames, data):
         const t = smoothstep(total_frames, 0, frames_left)
@@ -247,6 +250,12 @@ def sequence_move(level_elem, truck_elem, dir):
         truck_elem.offset = lerp(start_offset, xy(0, 0), t)
         
     def move_leave(data):
+        const level_state = data.level_state
+        const truck_elem = data.truck_elem
+        const truck_idx = truck_elem.which
+        if is_truck_at_goal(level_state, truck_idx):
+            play_sound(Goal_sound)
+
         truck_elem.anim = "idle"
         
     const move_data = {
@@ -303,6 +312,8 @@ level_element = init_level_element(level_state)
 
 frame
 ────────────────────────────────────────────────────────────────────────
+if mode_frames mod BACKGROUND_LOOP_FRAMES == 0:
+    bg_music = play_sound(BackgroundMusic_sound)
 
 update_cursor_hover()
 draw_mouse_cursor()
@@ -316,10 +327,7 @@ if actions.undo:
         and size(player_state.undo_stack) > 1):
         pop(player_state.undo_stack)
         
-    if 0 and size(player_state.undo_stack) > 1:
-        level_state = pop(player_state.undo_stack)
-    else:
-        level_state = copy_level_state(last_value(player_state.undo_stack))
+    level_state = copy_level_state(last_value(player_state.undo_stack))
     level_element = init_level_element(level_state)
 
 if not input_block.flag:
@@ -329,3 +337,7 @@ update_state(level_element, player_state, actions)
 draw_game(level_element, player_state)
 
 update_curr_drag()
+
+leave
+────────────────────────────────────────────────────────────────────────
+stop_audio(bg_music)

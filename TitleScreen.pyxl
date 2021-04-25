@@ -1,19 +1,21 @@
 TitleScreen
 ════════════════════════════════════════════════════════════════════════
 // Put local state for the mode here.  Declare variables with let, constants with const, and functions with def.
-
+let bg_music
 
 enter
 ────────────────────────────────────────────────────────────────────────
 // This event runs when the mode is entered via set_mode() or push_mode().
 set_background(TitleScreen_sprite)
-loop_music(BackgroundMusic_sound, BACKGROUND_LOOP_FRAMES)
+
 frame
 ────────────────────────────────────────────────────────────────────────
+if mode_frames mod BACKGROUND_LOOP_FRAMES == 0:
+    bg_music = play_sound(BackgroundMusic_sound)
+
 if any_button_press():
     set_mode(PlayLevel)
 
 leave
 ────────────────────────────────────────────────────────────────────────
-// This event runs just before leaving for another mode by set_mode() or pop_mode().
-
+stop_audio(bg_music)
