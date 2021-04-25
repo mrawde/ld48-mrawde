@@ -131,15 +131,24 @@ def handle_player_input(level_state, gamepad):
 
             
     return actions
+
+def level_sel_cb():
+    set_mode(LevelSelect)
     
+def reset_cb():
+    set_mode(PlayLevel, player_state.undo_stack[0])
+  
+
 def update_state(level_elem, player_state, actions):
     if actions.level_select:
-        set_mode(LevelSelect)
+        leave_level(level_sel_cb)
+        return
         
     const level_state = level_elem.state
     const board_size = level_state.size
     if actions.reset_level:
-        set_mode(PlayLevel, player_state.undo_stack[0])
+        leave_level(reset_cb)
+        return
 
     const start_path = actions.pathing and size(player_state.path) == 0
     if actions.next_player or actions.select or start_path:
@@ -299,8 +308,50 @@ def sequence_move(level_elem, truck_elem, dir):
         },
     ]
 
-def leave_level():
+def enter_level(player_state):
+    player_state.input_block++
+    const slide_target = xy(0, 0)
+    player_state.slide_pos = xy(-SCREEN_SIZE.x, 0)
+    def slide_frame(frames_left, total_frames, data):
+        const slide_target = data.target
+        const t = smoothstep(total_frames, 0, frames_left)
+        player_state.slide_pos = lerp(player_state.slide_pos, slide_target, t)
+    def slide_leave(data):
+        player_state.slide_pos = data.target
+        player_state.input_block--
+    const slide_data = {
+        target: slide_target,
+    }
+    sequence({
+        callback: slide_frame,
+        end_callback: slide_leave,
+        frames: FRAMES_LEVEL_SLIDE,
+        data: slide_data,
+    })
     
+def leave_level(cb):
+    player_state.input_block++
+    const slide_target = xy(SCREEN_SIZE.x, 0)
+    player_state.slide_pos = xy(0, 0)
+    def slide_frame(frames_left, total_frames, data):
+        const slide_target = data.target
+        const t = smoothstep(total_frames, 0, frames_left)
+        player_state.slide_pos = lerp(player_state.slide_pos, slide_target, t)
+    def slide_leave(data):
+        player_state.slide_pos = data.target
+        player_state.input_block--
+        delay(data.callback, 0)
+        
+    const slide_data = {
+        target: slide_target,
+        callback: cb,
+    }
+    sequence({
+        callback: slide_frame,
+        end_callback: slide_leave,
+        frames: FRAMES_LEVEL_SLIDE,
+        data: slide_data,
+    })    
 def sequence_exit_level():
     
 
@@ -314,6 +365,8 @@ player_state = {
     undo_stack: [],
     path: [],
     last_path: [],
+    // used to slide everything away
+    slide_pos: xy(0, 0),
 }
 
 input_block = {
@@ -332,6 +385,7 @@ else:
     level_state = init_level_state(level)
 push(player_state.undo_stack, copy_level_state(level_state))
 level_element = init_level_element(level_state)
+enter_level(player_state)
 
 frame
 ────────────────────────────────────────────────────────────────────────
@@ -356,7 +410,11 @@ if not input_block.flag:
     check_level(level_state)      
     
 update_state(level_element, player_state, actions)
-draw_game(level_element, player_state)
+preserving_transform:
+    compose_transform({
+        pos: player_state.slide_pos,
+    })
+    draw_game(level_element, player_state)
 
 update_curr_drag()
 

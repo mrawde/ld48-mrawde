@@ -5,7 +5,7 @@ LevelSelect
 
 def draw_level_selection(game_progress):
     const x_offset = LEVEL_SELECT_OFFSET.x
-    const level_offset = 1.1 * LEVEL_SELECT_SIZE
+    const level_offset = 1.125 * LEVEL_SELECT_SIZE
     let y_offset = LEVEL_SELECT_OFFSET.y
     const level_text_color = LEVEL_SELECT_COLOR
     const level_font = weaver_10_font

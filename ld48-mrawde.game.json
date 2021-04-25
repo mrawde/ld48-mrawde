@@ -65,18 +65,18 @@
         "BUTTONS_OFFSET": {
             "description": "Offset for buttons",
             "nudge": {
-                "x": "+10",
-                "y": "-10"
+                "x": "+1",
+                "y": "-1"
             },
             "type": "xy",
             "value": {
                 "x": {
                     "type": "number",
-                    "value": "50"
+                    "value": "47"
                 },
                 "y": {
                     "type": "number",
-                    "value": "205"
+                    "value": "207"
                 }
             }
         },
@@ -149,14 +149,14 @@
         "BUTTON_SIZE": {
             "description": "Size for buttons",
             "nudge": {
-                "x": "+5",
-                "y": "-5"
+                "x": "+1",
+                "y": "-1"
             },
             "type": "xy",
             "value": {
                 "x": {
                     "type": "number",
-                    "value": "60"
+                    "value": "62"
                 },
                 "y": {
                     "type": "number",
@@ -468,6 +468,21 @@
             "description": "Z for the trucks",
             "type": "number",
             "value": "2"
+        },
+        "FRAMES_LEVEL_SLIDE": {
+            "type": "number",
+            "value": "20",
+            "description": "How long it takes for a level to slide in/out.",
+            "min": {
+                "type": "number",
+                "value": "1"
+            },
+            "max": {
+                "type": "number",
+                "value": "600"
+            },
+            "format": "",
+            "quantum": 0
         }
     },
     "cooperative": false,
