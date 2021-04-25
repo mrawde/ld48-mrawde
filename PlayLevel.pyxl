@@ -315,7 +315,9 @@ def sequence_move(level_elem, truck_elem, dir):
 def enter_level(player_state):
     player_state.input_block++
     const slide_target = xy(0, 0)
-    player_state.slide_pos = xy(-SCREEN_SIZE.x, 0)
+    //player_state.slide_pos = xy(-SCREEN_SIZE.x, 0)
+    player_state.slide_pos = xy(0, SCREEN_SIZE.y)
+
     def slide_frame(frames_left, total_frames, data):
         const slide_target = data.target
         const t = smoothstep(total_frames, 0, frames_left)
@@ -336,7 +338,8 @@ def enter_level(player_state):
 def leave_level(cb):
     player_state.leaving = true
     player_state.input_block++
-    const slide_target = xy(SCREEN_SIZE.x, 0)
+    //const slide_target = xy(SCREEN_SIZE.x, 0)
+    const slide_target = xy(0, -SCREEN_SIZE.y)
     player_state.slide_pos = xy(0, 0)
     def slide_frame(frames_left, total_frames, data):
         const slide_target = data.target

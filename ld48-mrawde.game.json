@@ -129,7 +129,7 @@
             },
             "quantum": 0,
             "type": "number",
-            "value": "50"
+            "value": "81.60000000000002"
         },
         "BOARD_OFFSET": {
             "description": "offset from the screen for tile[0,0]",
@@ -675,6 +675,11 @@
             "description": "Z for the trucks",
             "type": "number",
             "value": "2"
+        },
+        "Z_UI": {
+            "type": "number",
+            "value": "2.9",
+            "description": "Z for the ui elements."
         }
     },
     "cooperative": false,

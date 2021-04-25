@@ -88,6 +88,10 @@ def button_state(args):
     const active = not disabled and ((hover and touch.a) or long_press_started_here)
             
     preserving_transform:
+        compose_transform({
+            z: Z_UI,
+        })
+
         if active:
             compose_transform({
                 pos: xy(0, 1),
