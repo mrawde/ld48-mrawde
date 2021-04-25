@@ -497,9 +497,7 @@
     "modes": [
         "PlayLevel",
         "TitleScreen",
-        "LevelSelect",
-        "GameOver",
-        "FinishLevelPack"
+        "LevelSelect"
     ],
     "packages": [],
     "screenshot_tag": "ld48-mrawde",
