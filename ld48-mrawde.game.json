@@ -677,13 +677,13 @@
             "value": "2"
         },
         "Z_UI": {
+            "description": "Z for the ui elements.",
             "type": "number",
-            "value": "2.9",
-            "description": "Z for the ui elements."
+            "value": "2.9"
         }
     },
     "cooperative": false,
-    "copyright": "©2021 Edward Luong",
+    "copyright": "\u00a92021 Edward Luong",
     "description": "Dig deeper into the world by solving Numberlink puzzles.",
     "developer": "Edward Luong",
     "docs": [],

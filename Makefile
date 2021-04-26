@@ -7,7 +7,7 @@ QUADPLAY_ROOT = /Users/Ed/projects/quadplay-dev/
 GAME_NAME = ld48-mrawde
 GAME_VERSION = 1.0.0
 
-ITCH_GAME_NAME=ld48-mrawde
+ITCH_GAME_NAME=lumenbrink
 ITCH_RELEASE_USER=mrawde
 ITCH_RELEASE_FILE = $(ITCH_GAME_NAME).$(GAME_VERSION).zip
 
